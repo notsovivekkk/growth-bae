@@ -46,10 +46,10 @@ export function Header() {
   return (
     <header
       className={cn(
-        "fixed left-0 right-0 top-0 z-50 transition-all duration-300",
+        "fixed left-0 right-0 top-0 z-50 py-2 transition-all duration-300",
         isScrolled
-          ? "border-b border-primary/5 bg-secondary/90 py-1 backdrop-blur-md"
-          : "bg-transparent py-1.5"
+          ? "border-b border-primary/5 bg-secondary/90 backdrop-blur-md"
+          : "bg-transparent"
       )}
     >
       <Container>
