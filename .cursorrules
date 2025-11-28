@@ -1,0 +1,558 @@
+# Engineering Rules - GrowthBae Project
+
+This file contains the engineering standards and principles for this codebase.
+ALL code generation and edits must follow these rules.
+
+## 🏗 GENERAL PHILOSOPHY
+
+- Write **minimal, boring, predictable code**
+- Prefer **clarity over cleverness**
+- Every file should do **one thing well** (Single Responsibility Principle)
+- Code should be **easy to delete or extend tomorrow**
+- Always ask: "If we add 3 more features next month, will this still hold up?"
+
+## 📁 PROJECT STRUCTURE & ORGANIZATION
+
+### Feature-Oriented, Layered Structure
+
+```
+app/                    → Next.js routes, pages, layouts
+components/
+  ├── ui/              → Atomic, reusable presentational components
+  ├── blocks/          → Composed sections (navbar, hero, etc.)
+  ├── layout/          → Layout components (header, footer)
+  └── sections/        → Page-specific sections
+lib/
+  ├── api/             → API clients, fetchers
+  ├── hooks/           → Shared custom React hooks
+  ├── design/          → Design tokens, theme config
+  └── utils/           → Pure utility helpers
+types/                 → Shared TypeScript types & interfaces
+```
+
+### Organization Rules
+
+1. **No business logic inside UI components**
+2. **No network calls directly in components** (except server components with clear isolation)
+3. Keep **cross-cutting concerns** (API, state, design, utils) in `lib/` or `types/`
+4. One file = one concern
+5. Colocate related code (e.g., all user-related API calls in `lib/api/users.ts`)
+
+## 🧾 TYPESCRIPT STANDARDS
+
+### Strictness
+- ✅ Enable **strict mode** always
+- ❌ Never use `any` unless explicitly justified with a comment
+- ✅ Prefer `type` and `interface` over inline object annotations
+- ✅ Export reusable types from `types/` or closest domain folder
+- ✅ Use enums/union types for fixed sets instead of magic strings
+
+### Type Guidelines
+```typescript
+// ✅ GOOD
+type Status = "draft" | "published" | "archived"
+interface User {
+  id: string
+  name: string
+  status: Status
+}
+
+// ❌ BAD
+function doSomething(data: any) { }
+const user = { name: "John" } // Missing type
+```
+
+## ⚛ REACT / NEXT.JS RULES
+
+### Component Architecture
+
+1. **Server Components by default** in Next.js
+2. Only use `"use client"` when:
+   - Using state, effects, or browser APIs
+   - Handling user interactions
+3. Prefer **functional components** with explicit props types
+4. Keep components **small** (ideally < 150 lines)
+
+### Logic Extraction
+Extract complex logic into:
+- **Custom hooks** in `lib/hooks/` (e.g., `useFeatureX`)
+- **Pure helpers** in `lib/utils/`
+
+### JSX Rules
+
+```typescript
+// ✅ GOOD - Clean, extracted logic
+export function ProjectCard({ project }: ProjectCardProps) {
+  const statusColor = getStatusColor(project.status)
+  const formattedDate = formatDate(project.createdAt)
+
+  return (
+    <Card>
+      <CardTitle>{project.title}</CardTitle>
+      <Badge color={statusColor}>{project.status}</Badge>
+      <Caption>{formattedDate}</Caption>
+    </Card>
+  )
+}
+
+// ❌ BAD - Inline complex logic
+export function ProjectCard({ project }: ProjectCardProps) {
+  return (
+    <Card>
+      <CardTitle>{project.title}</CardTitle>
+      <Badge color={
+        project.status === "draft" ? "gray" : 
+        project.status === "published" ? "green" : "red"
+      }>
+        {project.status}
+      </Badge>
+    </Card>
+  )
+}
+```
+
+### Props Guidelines
+- Props should be **explicit and typed**
+- No `any` or unstructured `props`
+- Use destructuring with types
+- Provide sensible defaults
+
+```typescript
+// ✅ GOOD
+interface ButtonProps {
+  variant?: "primary" | "ghost" | "underline"
+  size?: "sm" | "md" | "lg"
+  children: React.ReactNode
+}
+
+export function Button({ 
+  variant = "primary", 
+  size = "md", 
+  children 
+}: ButtonProps) { }
+
+// ❌ BAD
+export function Button(props: any) { }
+```
+
+## 🎨 STYLING & DESIGN SYSTEM
+
+### GBAE Design System Rules
+
+1. **Use Tailwind + design tokens ONLY**
+   - ❌ No inline styles
+   - ❌ No raw hex colors
+   - ❌ No arbitrary values like `w-[347px]` unless justified
+
+2. **All colors from design system**
+   ```tsx
+   // ✅ GOOD
+   <div className="bg-secondary text-primary">
+   <div className="bg-accent hover:bg-primary">
+   
+   // ❌ BAD
+   <div className="bg-[#F5F1E5]">
+   <div style={{ backgroundColor: '#004225' }}>
+   ```
+
+3. **Spacing follows 8px grid**
+   ```tsx
+   // ✅ GOOD - Multiples of 8px
+   <div className="space-y-4">  {/* 32px */}
+   <div className="py-8">       {/* 64px */}
+   
+   // ❌ BAD - Arbitrary values
+   <div className="space-y-[23px]">
+   <div className="py-[47px]">
+   ```
+
+4. **No one-off pixel values** unless there's a strong reason
+   - If breaking this rule, add a comment explaining why
+
+## 🧩 COMPONENT DESIGN PRINCIPLES
+
+### Atoms (`components/ui/`)
+- **Purely presentational**
+- No business logic
+- No data fetching
+- Just layout, styling, and props
+- Accept all necessary data via props
+
+```typescript
+// ✅ GOOD - Pure, presentational
+export function Button({ variant, children, onClick }: ButtonProps) {
+  return (
+    <button className={cn(variantStyles[variant])} onClick={onClick}>
+      {children}
+    </button>
+  )
+}
+
+// ❌ BAD - Has business logic
+export function Button({ userId }: { userId: string }) {
+  const user = fetchUser(userId) // ❌ Fetching in atom
+  return <button>Hello {user.name}</button>
+}
+```
+
+### Blocks/Sections (`components/blocks/`, `components/sections/`)
+- Accept props for content (no hard-coded copy)
+- Composable: reusable on multiple pages
+- Responsible for layout of atoms, NOT data fetching
+- Can accept data as props
+
+```typescript
+// ✅ GOOD - Accepts data via props
+interface HeroProps {
+  title: string
+  description: string
+  ctaText: string
+  ctaHref: string
+}
+
+export function HeroSection({ title, description, ctaText, ctaHref }: HeroProps) {
+  return (
+    <Section>
+      <Container>
+        <H1>{title}</H1>
+        <Lead>{description}</Lead>
+        <Button href={ctaHref}>{ctaText}</Button>
+      </Container>
+    </Section>
+  )
+}
+
+// ❌ BAD - Hard-coded content
+export function HeroSection() {
+  return (
+    <Section>
+      <H1>Welcome to GrowthBae</H1> {/* ❌ Hard-coded */}
+    </Section>
+  )
+}
+```
+
+### Page-Level (`app/`)
+- Orchestrate data + blocks
+- Fetch data (in server components) and pass into blocks via props
+- Keep thin - just composition
+
+```typescript
+// ✅ GOOD - Server component, fetches and composes
+export default async function ProjectsPage() {
+  const projects = await fetchProjects()
+  
+  return (
+    <>
+      <HeroSection 
+        title="Our Projects"
+        description="Explore our case studies"
+      />
+      <ProjectsGrid projects={projects} />
+    </>
+  )
+}
+```
+
+### Splitting Rule
+**If a component grows too big or has multiple responsibilities → SPLIT it**
+
+Signs to split:
+- File > 200 lines
+- Component does more than one thing
+- Multiple levels of nested conditionals
+- Hard to name the component concisely
+
+## 🌐 API & DATA LAYER
+
+### Structure
+All data fetching lives in:
+- `lib/api/` for client-side fetching
+- Server components for server-side fetching
+
+### API File Organization
+One file per domain:
+```
+lib/api/
+  ├── projects.ts
+  ├── case-studies.ts
+  ├── users.ts
+  └── analytics.ts
+```
+
+### API Function Guidelines
+
+```typescript
+// ✅ GOOD - Typed, clear, handles errors
+export async function fetchProjects(): Promise<Project[]> {
+  try {
+    const response = await fetch(`${API_BASE_URL}/projects`, {
+      headers: {
+        Authorization: `Bearer ${process.env.API_TOKEN}`,
+      },
+    })
+    
+    if (!response.ok) {
+      throw new Error(`Failed to fetch projects: ${response.status}`)
+    }
+    
+    return await response.json()
+  } catch (error) {
+    console.error('Error fetching projects:', error)
+    return [] // Graceful fallback
+  }
+}
+
+// ❌ BAD - No types, no error handling
+export async function fetchProjects() {
+  const res = await fetch('https://hardcoded-url.com/projects')
+  return res.json()
+}
+```
+
+### Rules
+1. Use **typed functions** with clear input + output types
+2. Handle errors gracefully; don't crash the UI
+3. Never hard-code URLs or tokens; read from env variables
+4. Return fallback data or throw meaningful errors
+
+## 🚦 STATE, ERRORS & LOADING
+
+### Every Async View Must Have
+
+1. **Loading state**
+   ```tsx
+   if (isLoading) return <Skeleton />
+   ```
+
+2. **Error state**
+   ```tsx
+   if (error) return <ErrorMessage>Failed to load projects</ErrorMessage>
+   ```
+
+3. **Empty state** (when applicable)
+   ```tsx
+   if (projects.length === 0) return <EmptyState>No projects yet</EmptyState>
+   ```
+
+### UI Rule
+❌ **Do NOT leave placeholders** like `TODO: add error handling`
+
+✅ **Always show proper UX:**
+- Loading → Use skeleton or subtle loader
+- Error → Simple, clear message with retry option
+- Empty → Soft, helpful copy with next action
+
+```tsx
+// ✅ GOOD - Complete states
+export function ProjectsList({ projects, isLoading, error }: Props) {
+  if (isLoading) {
+    return <ProjectsSkeleton />
+  }
+  
+  if (error) {
+    return (
+      <ErrorState>
+        <Body>Failed to load projects. Please try again.</Body>
+        <Button onClick={retry}>Retry</Button>
+      </ErrorState>
+    )
+  }
+  
+  if (projects.length === 0) {
+    return (
+      <EmptyState>
+        <Body>No projects yet. Create your first one!</Body>
+        <Button href="/projects/new">Create Project</Button>
+      </EmptyState>
+    )
+  }
+  
+  return <ProjectsGrid projects={projects} />
+}
+
+// ❌ BAD - No error/empty states
+export function ProjectsList({ projects }: Props) {
+  return <ProjectsGrid projects={projects} />
+}
+```
+
+## 🔁 EXTENSIBILITY / FUTURE-PROOFING
+
+### Design for Tomorrow
+
+When implementing a feature, structure as if we might:
+- Add one more variant
+- Add one more data source
+- Add one more page using the same block
+
+### Patterns
+
+1. **Prefer configuration over duplication**
+   ```typescript
+   // ✅ GOOD - Configurable
+   const FEATURE_CONFIG = [
+     { icon: "🚀", title: "Fast", description: "..." },
+     { icon: "🔒", title: "Secure", description: "..." },
+     { icon: "📈", title: "Scalable", description: "..." },
+   ]
+   
+   return FEATURE_CONFIG.map(feature => (
+     <FeatureCard key={feature.title} {...feature} />
+   ))
+   
+   // ❌ BAD - Duplicated JSX
+   return (
+     <>
+       <FeatureCard icon="🚀" title="Fast" description="..." />
+       <FeatureCard icon="🔒" title="Secure" description="..." />
+       <FeatureCard icon="📈" title="Scalable" description="..." />
+     </>
+   )
+   ```
+
+2. **Use props, config objects, and mapping structures**
+3. **For anything repeated 3+ times → extract**
+
+### The "3 Times Rule"
+If you copy-paste similar code 3 times, stop and extract it into:
+- A reusable component
+- A utility function
+- A configuration object
+
+## 📏 FILE & FUNCTION SIZE LIMITS
+
+### Limits
+- **Component files:** ≤ 200 lines (aim for ≤ 150)
+- **Functions:** ≤ 40 lines (aim for ≤ 30)
+- **JSX blocks:** ≤ 50 lines before extracting subcomponent
+
+### When Breaking Limits
+Consciously refactor:
+1. Split into smaller helpers
+2. Extract hooks (`useSomething`)
+3. Extract subcomponents
+4. Move logic to separate files
+
+```typescript
+// ✅ GOOD - Extracted logic
+function useProjectFilters(projects: Project[]) {
+  const [filters, setFilters] = useState<Filters>({})
+  const filtered = useMemo(() => 
+    applyFilters(projects, filters), 
+    [projects, filters]
+  )
+  return { filtered, filters, setFilters }
+}
+
+export function ProjectsPage() {
+  const { data: projects } = useProjects()
+  const { filtered, filters, setFilters } = useProjectFilters(projects)
+  
+  return (
+    <>
+      <FilterBar filters={filters} onChange={setFilters} />
+      <ProjectsGrid projects={filtered} />
+    </>
+  )
+}
+
+// ❌ BAD - Everything in one component (100+ lines)
+export function ProjectsPage() {
+  // 20 lines of filter logic
+  // 30 lines of fetch logic
+  // 50 lines of JSX
+  // = 100+ lines total
+}
+```
+
+## 🔧 TOOLING & QUALITY
+
+### Code Quality Standards
+
+1. **Enforce ESLint + Prettier**
+   - No unused imports
+   - No unreachable code
+   - Consistent formatting
+
+2. **Prefer named exports**
+   ```typescript
+   // ✅ GOOD
+   export function Button() { }
+   export function Card() { }
+   
+   // ⚠️ Use sparingly
+   export default function HomePage() { } // Only for pages
+   ```
+
+3. **Use meaningful names**
+   - ✅ Good: `ProjectCard`, `SectionWrapper`, `fetchProjects`
+   - ❌ Bad: `PC`, `Wrap`, `getProj`
+
+4. **Avoid abbreviations** unless absolutely standard
+   - ✅ OK: `id`, `url`, `api`, `ui`
+   - ❌ Avoid: `usr`, `proj`, `desc`, `btn`
+
+### File Naming Conventions
+- Components: `kebab-case.tsx` → `project-card.tsx`
+- Utilities: `kebab-case.ts` → `format-date.ts`
+- Types: `kebab-case.ts` → `user-types.ts`
+- API: `kebab-case.ts` → `case-studies.ts`
+
+## ✅ YOUR JOB AS AN AI ASSISTANT
+
+From now on, when generating or editing code in this repo:
+
+1. **FOLLOW all rules above**
+2. **If you break a rule for a good reason, EXPLAIN IT IN A COMMENT**
+3. **Always optimize for:**
+   - Readability
+   - Minimalism
+   - Ability to extend features tomorrow with minimal refactoring
+
+### Before Submitting Code, Check:
+- [ ] No business logic in UI components?
+- [ ] All colors using design tokens?
+- [ ] All spacing following 8px grid?
+- [ ] Loading/error/empty states handled?
+- [ ] Types defined (no `any`)?
+- [ ] File < 200 lines?
+- [ ] Functions < 40 lines?
+- [ ] Repeated code extracted?
+- [ ] Meaningful names used?
+- [ ] No unused imports?
+
+### Red Flags to Avoid
+- ❌ Hard-coded content in reusable components
+- ❌ API calls in UI components
+- ❌ Inline styles or arbitrary Tailwind values
+- ❌ Files over 200 lines
+- ❌ Missing TypeScript types
+- ❌ No error handling
+- ❌ Duplicated code (3+ times)
+- ❌ Abbreviations in names
+
+## 📚 Project-Specific Context
+
+### Design System: GBAE
+- Primary: #004225 (Deep Green)
+- Secondary: #F5F1E5 (Soft Cream)
+- Accent: #0B6E4F (Fresh Green)
+- All design tokens in `src/lib/design/tokens.ts`
+- See `GBAE_DESIGN_SYSTEM.md` for complete guide
+
+### Tech Stack
+- Next.js 14 (App Router)
+- TypeScript (strict mode)
+- Tailwind CSS
+- ShadCN UI conventions
+- Inter font (Aktiv Grotesk fallback)
+
+### Import Aliases
+- `@/` → `src/`
+- Use absolute imports always
+
+---
+
+**Remember: Boring, predictable code that's easy to delete is better than clever code that's hard to change.**
+
