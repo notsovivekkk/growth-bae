@@ -4,70 +4,60 @@ import { motion } from "framer-motion"
 import { Container } from "@/components/ui/container"
 import { Section } from "@/components/ui/section"
 
+/**
+ * Why GrowthBae Section
+ * Three-column grid: PROBLEM, SOLUTION, OUTCOME
+ * Cards with hover effects
+ */
 export function WhyGrowthbaeSection() {
+  const items = [
+    {
+      label: "PROBLEM",
+      text: "Founders know what they want to build but don't have the team to do it right.",
+    },
+    {
+      label: "SOLUTION",
+      text: "We validate the idea, move fast and help you ship in far less time.",
+    },
+    {
+      label: "OUTCOME",
+      text: "We turn unclear concepts into plans and clean systems ready to scale.",
+    },
+  ]
+
   return (
-    <Section padding="none" className="bg-secondary pt-6 pb-12 sm:pt-8 sm:pb-16 md:pt-10 md:pb-24">
-      <Container size="default" className="max-w-7xl px-4 md:px-6">
-        {/* Section Tag */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.5 }}
-          className="mb-8 inline-block rounded-full border border-[#008556]/20 px-3 py-1 text-xs font-medium uppercase tracking-widest text-[#008556] sm:mb-12"
-        >
-          Why Growthbae?
-        </motion.div>
+    <Section className="bg-[#F5F1E5] !pb-4 !pt-8 md:!pb-6 md:!pt-12">
+      <Container>
+        <div className="mx-auto max-w-6xl">
+          <div className="mb-8 md:mb-12">
+            <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-[#004225]/10 bg-white/10 px-4 py-2 text-sm font-medium text-[#004225] backdrop-blur-md">
+              <span className="relative flex h-2 w-2">
+                <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-green-400 opacity-75"></span>
+                <span className="relative inline-flex h-2 w-2 rounded-full bg-green-500"></span>
+              </span>
+              WHY GROWTHBAE?
+            </div>
+          </div>
 
-        {/* 3-Column Card Grid */}
-        <div className="grid grid-cols-1 gap-4 sm:gap-6 md:grid-cols-3 md:gap-8">
-          {/* Card 1: PROBLEM */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5, delay: 0.1 }}
-            className="flex h-auto min-h-[280px] w-full flex-col justify-between rounded-xl bg-[#F6EEDA] p-4 shadow-sm transition-all duration-300 hover:shadow-md sm:min-h-[320px] sm:p-6 md:h-[380px] md:p-8"
-          >
-            <h3 className="text-xs font-normal uppercase tracking-widest text-[#9A8C74]">
-              PROBLEM
-            </h3>
-            <p className="text-lg font-medium leading-[1.1] text-[#008556] sm:text-xl md:text-2xl">
-              Founders know what they want to build but don't have the team to do it right.
-            </p>
-          </motion.div>
-
-          {/* Card 2: SOLUTION */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5, delay: 0.2 }}
-            className="flex h-auto min-h-[280px] w-full flex-col justify-between rounded-xl bg-[#F6EEDA] p-4 shadow-sm transition-all duration-300 hover:shadow-md sm:min-h-[320px] sm:p-6 md:h-[380px] md:p-8"
-          >
-            <h3 className="text-xs font-normal uppercase tracking-widest text-[#9A8C74]">
-              SOLUTION
-            </h3>
-            <p className="text-lg font-medium leading-[1.1] text-[#008556] sm:text-xl md:text-2xl">
-              We validate the idea, move fast and help you ship in far less time.
-            </p>
-          </motion.div>
-
-          {/* Card 3: OUTCOME */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5, delay: 0.3 }}
-            className="flex h-auto min-h-[280px] w-full flex-col justify-between rounded-xl bg-[#F6EEDA] p-4 shadow-sm transition-all duration-300 hover:shadow-md sm:min-h-[320px] sm:p-6 md:h-[380px] md:p-8"
-          >
-            <h3 className="text-xs font-normal uppercase tracking-widest text-[#9A8C74]">
-              OUTCOME
-            </h3>
-            <p className="text-lg font-medium leading-[1.1] text-[#008556] sm:text-xl md:text-2xl">
-              We turn unclear concepts into plans and clean systems ready to scale.
-            </p>
-          </motion.div>
+          <div className="grid gap-6 md:grid-cols-3">
+            {items.map((item, idx) => (
+              <motion.div
+                key={idx}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ delay: idx * 0.1, duration: 0.5 }}
+                viewport={{ once: true }}
+                className="flex h-full min-h-[200px] flex-col gap-3 rounded-2xl bg-[#004225]/5 p-4 transition-colors duration-300 hover:bg-[#004225]/10 md:min-h-[280px] md:gap-6 md:rounded-3xl md:p-6 lg:p-8"
+              >
+                <span className="text-[10px] font-bold uppercase tracking-widest text-[#0B6E4F] md:text-xs">
+                  {item.label}
+                </span>
+                <p className="mt-auto text-base font-medium leading-relaxed text-[#004225] md:text-lg lg:text-xl xl:text-2xl">
+                  {item.text}
+                </p>
+              </motion.div>
+            ))}
+          </div>
         </div>
       </Container>
     </Section>

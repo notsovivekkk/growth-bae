@@ -1,39 +1,56 @@
 "use client"
 
 import { useState, useEffect } from "react"
-import { motion } from "framer-motion"
+import { motion, AnimatePresence } from "framer-motion"
 import { Container } from "@/components/ui/container"
 import { Logo } from "@/components/ui/logo"
-import { NavLink } from "@/components/ui/nav-link"
+import { Button } from "@/components/ui/button"
 import { Menu, X } from "lucide-react"
 import { cn } from "@/lib/utils"
+import Link from "next/link"
 
 /**
- * GBAE Header Component (Molecule)
- * Fully responsive navigation with mobile menu
- * Mobile-first: hamburger menu on mobile, full nav on desktop
- * Includes scroll detection for dynamic styling
+ * Header Component
+ * Navigation with Home, Process, Services, Works
+ * Includes "Book a Call" button
+ * Scroll detection with glassmorphism effect
+ * Full-screen mobile menu overlay with scroll lock
  */
 
 const navigation = [
-  { name: "About", href: "#about" },
-  { name: "Work", href: "#work" },
-  { name: "Contact", href: "#contact" },
+  { name: "Home", href: "#home" },
+  { name: "Process", href: "#process" },
+  { name: "Services", href: "#services" },
+  { name: "Works", href: "#works" },
 ]
 
 export function Header() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
   const [isScrolled, setIsScrolled] = useState(false)
 
-  // Handle scroll for navbar styling
+  // Handle scroll for navbar styling (glassmorphism effect)
   useEffect(() => {
     const handleScroll = () => {
-      setIsScrolled(window.scrollY > 20)
+      setIsScrolled(window.scrollY > 50)
     }
 
     window.addEventListener("scroll", handleScroll)
     return () => window.removeEventListener("scroll", handleScroll)
   }, [])
+
+  // Lock body scroll when mobile menu is open
+  useEffect(() => {
+    if (isMobileMenuOpen) {
+      document.body.style.overflow = "hidden"
+    } else {
+      document.body.style.overflow = ""
+    }
+
+    // Cleanup on unmount
+    return () => {
+      document.body.style.overflow = ""
+    }
+  }, [isMobileMenuOpen])
 
   const toggleMobileMenu = () => {
     setIsMobileMenuOpen(!isMobileMenuOpen)
@@ -46,35 +63,46 @@ export function Header() {
   return (
     <header
       className={cn(
-        "fixed left-0 right-0 top-0 z-50 py-2 transition-all duration-300",
+        "fixed left-0 top-0 z-50 w-full transition-all duration-300",
         isScrolled
-          ? "border-b border-primary/5 bg-secondary/90 backdrop-blur-md"
-          : "bg-transparent"
+          ? "border-b border-[#004225]/10 bg-[#F5F1E5]/90 py-4 shadow-sm backdrop-blur-md"
+          : "bg-transparent py-6"
       )}
     >
       <Container>
-        <div className="flex h-10 items-center justify-between sm:h-11 lg:h-12">
+        <div className="flex items-center justify-between">
           {/* Logo */}
-          <Logo href="/" size="md" className="relative z-50 flex-shrink-0" />
+          <Link
+            href="#home"
+            className="block transition-opacity hover:opacity-90"
+          >
+            <Logo href="/" size="md" className="relative z-50 flex-shrink-0" />
+          </Link>
 
-          {/* Desktop Navigation - Shifted to the right, hidden on mobile, visible from md */}
-          <nav className="ml-auto hidden items-center gap-6 md:flex lg:gap-8">
+          {/* Desktop Navigation */}
+          <nav className="hidden items-center gap-6 md:flex">
             {navigation.map((item) => (
-              <NavLink
+              <Link
                 key={item.name}
                 href={item.href}
-                className="group relative text-sm font-medium lg:text-body"
+                className="text-sm font-medium text-[#004225]/80 transition-colors hover:text-[#004225]"
               >
                 {item.name}
-                <span className="absolute -bottom-1 left-0 h-px w-0 bg-accent transition-all group-hover:w-full" />
-              </NavLink>
+              </Link>
             ))}
+            <Button
+              variant="primary"
+              size="md"
+              className="rounded-full bg-[#004225] !px-6 !py-2.5 !text-sm text-[#F5F1E5] shadow-none hover:bg-[#0B6E4F]"
+            >
+              Book a Call
+            </Button>
           </nav>
 
-          {/* Mobile Menu Button - Visible only on mobile */}
+          {/* Mobile Menu Button */}
           <button
             onClick={toggleMobileMenu}
-            className="z-50 flex items-center justify-center p-1.5 text-primary transition-colors hover:text-accent md:hidden"
+            className="z-50 flex items-center justify-center p-2 text-[#004225] md:hidden"
             aria-label="Toggle menu"
             aria-expanded={isMobileMenuOpen}
           >
@@ -87,25 +115,35 @@ export function Header() {
         </div>
       </Container>
 
-      {/* Mobile Menu Overlay - Full screen like reference */}
-      {isMobileMenuOpen && (
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          className="fixed inset-0 z-40 flex flex-col items-center justify-center gap-8 bg-secondary md:hidden"
-        >
-          {navigation.map((item) => (
-            <NavLink
-              key={item.name}
-              href={item.href}
-              onClick={closeMobileMenu}
-              className="text-2xl font-bold text-primary"
+      {/* Mobile Menu Overlay - Full screen with solid background and scroll lock */}
+      <AnimatePresence>
+        {isMobileMenuOpen && (
+          <motion.div
+            initial={{ opacity: 0, y: -20 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -20 }}
+            className="fixed inset-0 z-40 flex h-screen w-screen flex-col items-center justify-center gap-8 bg-[#F5F1E5] md:hidden"
+          >
+            {navigation.map((item) => (
+              <Link
+                key={item.name}
+                href={item.href}
+                className="rounded-lg p-2 text-base font-medium text-[#004225] hover:bg-[#004225]/5"
+                onClick={closeMobileMenu}
+              >
+                {item.name}
+              </Link>
+            ))}
+            <Button
+              variant="primary"
+              size="md"
+              className="w-full rounded-full bg-[#004225] !px-6 !py-2.5 !text-sm text-[#F5F1E5] shadow-none hover:bg-[#0B6E4F]"
             >
-              {item.name}
-            </NavLink>
-          ))}
-        </motion.div>
-      )}
+              Book a Call
+            </Button>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </header>
   )
 }

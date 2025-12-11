@@ -1,6 +1,6 @@
 import type { Metadata } from "next"
 import localFont from "next/font/local"
-import { Inter } from "next/font/google"
+import { Inter, Playfair_Display } from "next/font/google"
 import "@/styles/globals.css"
 import { siteConfig } from "@/config/site"
 import { cn } from "@/lib/utils"
@@ -45,6 +45,15 @@ const inter = Inter({
   variable: "--font-inter",
   display: "swap",
   weight: ["400", "500", "700"],
+})
+
+// Playfair Display for serif/italic text
+const playfairDisplay = Playfair_Display({
+  subsets: ["latin"],
+  variable: "--font-playfair",
+  display: "swap",
+  weight: ["400", "600"],
+  style: ["normal", "italic"],
 })
 
 export const metadata: Metadata = {
@@ -104,7 +113,8 @@ export default function RootLayout({
           // Smooth transitions for color and opacity
           "transition-soft",
           aktivGrotesk.variable,
-          inter.variable
+          inter.variable,
+          playfairDisplay.variable
         )}
       >
         {children}

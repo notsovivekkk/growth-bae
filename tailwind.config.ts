@@ -109,14 +109,15 @@ const config = {
       // ============================================
       fontFamily: {
         sans: [
-          "var(--font-aktiv)",
           "var(--font-inter)",
+          "var(--font-aktiv)",
           "system-ui",
           "sans-serif",
         ],
+        serif: ["var(--font-playfair)", "var(--font-inter)", "serif"],
         primary: [
-          "var(--font-aktiv)",
           "var(--font-inter)",
+          "var(--font-aktiv)",
           "system-ui",
           "sans-serif",
         ],
@@ -175,29 +176,29 @@ const config = {
       "slide-up": "slide-up 250ms cubic-bezier(0.4, 0, 0.2, 1)",
       "slide-down": "slide-down 250ms cubic-bezier(0.4, 0, 0.2, 1)",
       float: "float 6s ease-in-out infinite",
-        "fade-in-up": "fadeInUp 0.8s ease-out forwards",
-        scroll: "scroll 45s linear infinite",
-        shine: "shine 2s infinite",
-        fill: "fillWidth 1.5s ease-out forwards",
-        "fill-bar": "fillBar 1.5s cubic-bezier(0.16, 1, 0.3, 1) forwards",
+      "fade-in-up": "fadeInUp 0.8s ease-out forwards",
+      scroll: "scroll 45s linear infinite",
+      shine: "shine 2s infinite",
+      fill: "fillWidth 1.5s ease-out forwards",
+      "fill-bar": "fillBar 1.5s cubic-bezier(0.16, 1, 0.3, 1) forwards",
+    },
+    keyframes: {
+      scroll: {
+        "0%": { transform: "translateX(0)" },
+        "100%": { transform: "translateX(-50%)" },
       },
-      keyframes: {
-        scroll: {
-          "0%": { transform: "translateX(0)" },
-          "100%": { transform: "translateX(-50%)" },
-        },
-        shine: {
-          "0%": { left: "-100%" },
-          "100%": { left: "200%" },
-        },
-        fillWidth: {
-          "0%": { width: "0%" },
-          "100%": { width: "100%" },
-        },
-        fillBar: {
-          "0%": { width: "0%" },
-          "100%": { width: "100%" },
-        },
+      shine: {
+        "0%": { left: "-100%" },
+        "100%": { left: "200%" },
+      },
+      fillWidth: {
+        "0%": { width: "0%" },
+        "100%": { width: "100%" },
+      },
+      fillBar: {
+        "0%": { width: "0%" },
+        "100%": { width: "100%" },
+      },
       "fade-in": {
         "0%": { opacity: "0" },
         "100%": { opacity: "1" },

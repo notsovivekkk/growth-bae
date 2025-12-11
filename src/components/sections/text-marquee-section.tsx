@@ -1,48 +1,32 @@
 "use client"
 
-import { cn } from "@/lib/utils"
+import React from "react"
 
+/**
+ * Text Marquee Section
+ * Dark green background (#004225)
+ * Alternating text: "SHIP FASTER" / "VALIDATE NOW"
+ * Green dots between items
+ */
 export function TextMarqueeSection() {
+  const content = [1, 2, 3, 4, 5, 6, 7, 8].map((i) => (
+    <React.Fragment key={i}>
+      <span className="text-sm font-medium uppercase tracking-widest text-[#F5F1E5] md:text-base">
+        {i % 2 !== 0 ? "SHIP FASTER" : "VALIDATE NOW"}
+      </span>
+      <div className="h-3 w-3 rounded-full bg-[#34D399]" />
+    </React.Fragment>
+  ))
+
   return (
-    <div className="w-full border-y border-[#004225]/10 bg-[#004225] py-3 overflow-hidden sm:py-4">
-      <style>{`
-        @keyframes scroll-text {
-          0% { transform: translateX(0); }
-          100% { transform: translateX(-50%); }
-        }
-      `}</style>
-
-      <div
-        className="flex w-max min-w-full items-center whitespace-nowrap opacity-80 hover:[animation-play-state:paused]"
-        style={{ animation: "scroll-text 40s linear infinite" }}
-      >
-        {/* Set 1 */}
-        {[...Array(10)].map((_, i) => (
-          <div key={`set1-${i}`} className="flex items-center gap-2 pr-4 sm:gap-4 sm:pr-8">
-            <span className="font-mono text-xs uppercase tracking-widest text-[#F5F1E5] sm:text-sm">
-              Ship Faster
-            </span>
-            <div className="h-1.5 w-1.5 rounded-full bg-[#00C177] sm:h-2 sm:w-2" />
-            <span className="font-mono text-xs uppercase tracking-widest text-[#F5F1E5] sm:text-sm">
-              Validate Now
-            </span>
-            <div className="h-1.5 w-1.5 rounded-full bg-[#00C177] sm:h-2 sm:w-2" />
-          </div>
-        ))}
-
-        {/* Set 2 (Duplicate for seamless loop) */}
-        {[...Array(10)].map((_, i) => (
-          <div key={`set2-${i}`} className="flex items-center gap-2 pr-4 sm:gap-4 sm:pr-8">
-            <span className="font-mono text-xs uppercase tracking-widest text-[#F5F1E5] sm:text-sm">
-              Ship Faster
-            </span>
-            <div className="h-1.5 w-1.5 rounded-full bg-[#00C177] sm:h-2 sm:w-2" />
-            <span className="font-mono text-xs uppercase tracking-widest text-[#F5F1E5] sm:text-sm">
-              Validate Now
-            </span>
-            <div className="h-1.5 w-1.5 rounded-full bg-[#00C177] sm:h-2 sm:w-2" />
-          </div>
-        ))}
+    <div className="w-full overflow-hidden border-y border-[#F5F1E5]/5 bg-[#004225] py-4">
+      <div className="relative flex overflow-x-hidden">
+        <div className="animate-marquee flex items-center gap-12 whitespace-nowrap px-8">
+          {content}
+        </div>
+        <div className="animate-marquee2 absolute top-0 flex items-center gap-12 whitespace-nowrap px-8">
+          {content}
+        </div>
       </div>
     </div>
   )
