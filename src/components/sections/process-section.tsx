@@ -48,6 +48,34 @@ const PROCESS_STEPS = [
   },
 ]
 
+// Animation variants for each card
+const cardAnimations = [
+  {
+    // Discover - slide up
+    initial: { y: 50, opacity: 0 },
+    whileInView: { y: 0, opacity: 1 },
+    transition: { duration: 0.5 },
+  },
+  {
+    // Strategize - slide from left
+    initial: { x: -50, opacity: 0 },
+    whileInView: { x: 0, opacity: 1 },
+    transition: { duration: 0.5 },
+  },
+  {
+    // Build - slide from right
+    initial: { x: 50, opacity: 0 },
+    whileInView: { x: 0, opacity: 1 },
+    transition: { duration: 0.5 },
+  },
+  {
+    // Deliver - fade in with scale
+    initial: { scale: 0.9, opacity: 0 },
+    whileInView: { scale: 1, opacity: 1 },
+    transition: { duration: 0.5 },
+  },
+]
+
 function ProcessCard({
   step,
   index,
@@ -55,12 +83,14 @@ function ProcessCard({
   step: (typeof PROCESS_STEPS)[0]
   index: number
 }) {
+  const animation = cardAnimations[index]
+
   return (
     <div className="mb-3 last:mb-0 md:sticky md:top-24 md:mb-6 lg:top-32 lg:mb-12">
       <motion.div
-        initial={{ y: 50, opacity: 0 }}
-        whileInView={{ y: 0, opacity: 1 }}
-        transition={{ duration: 0.5 }}
+        initial={animation.initial}
+        whileInView={animation.whileInView}
+        transition={animation.transition}
         viewport={{ once: true, margin: "-10%" }}
         className="relative mx-auto flex w-full max-w-7xl flex-col items-start justify-between gap-3 overflow-hidden rounded-[2.5rem] border border-[#F5F1E5]/10 bg-gradient-to-br from-[#004225] to-[#002A18] p-4 text-[#F5F1E5] shadow-2xl md:flex-row md:items-center md:gap-6 md:p-6 lg:p-8"
       >

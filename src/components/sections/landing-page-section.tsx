@@ -17,12 +17,12 @@ import React from "react"
  */
 
 const LANDING_PAGE_EXAMPLES = [
-  "https://images.unsplash.com/photo-1547658719-da2b51169166?auto=format&fit=crop&q=80&w=800&h=600",
-  "https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&q=80&w=800&h=600",
-  "https://images.unsplash.com/photo-1558655146-d09347e0c766?auto=format&fit=crop&q=80&w=800&h=600",
-  "https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&q=80&w=800&h=600",
-  "https://images.unsplash.com/photo-1507238691740-187a5b1d37b8?auto=format&fit=crop&q=80&w=800&h=600",
-  "https://images.unsplash.com/photo-1522542550221-31fd19575a2d?auto=format&fit=crop&q=80&w=800&h=600",
+  "/images/lp1.jpg",
+  "/images/lp2.jpg",
+  "/images/lp3.jpg",
+  "/images/lp4.png",
+  "/images/lp5.png",
+  "/images/lp6.png",
 ]
 
 const features = [
@@ -91,24 +91,26 @@ export function LandingPageSection() {
             <div className="pointer-events-none absolute left-0 top-0 z-10 h-full w-32 bg-gradient-to-r from-[#F5F1E5] to-transparent" />
             {/* Right fade gradient */}
             <div className="pointer-events-none absolute right-0 top-0 z-10 h-full w-32 bg-gradient-to-l from-[#F5F1E5] to-transparent" />
-            
+
             <div className="animate-marquee flex gap-4 whitespace-nowrap">
-              {[...LANDING_PAGE_EXAMPLES, ...LANDING_PAGE_EXAMPLES, ...LANDING_PAGE_EXAMPLES].map(
-                (src, i) => (
-                  <div
-                    key={i}
-                    className="relative h-[140px] w-[200px] flex-shrink-0 cursor-pointer overflow-hidden rounded-xl border border-[#004225]/10 shadow-md transition-transform duration-700 hover:scale-110 md:h-[180px] md:w-[240px] md:rounded-2xl lg:h-[210px] lg:w-[280px]"
-                  >
-                    <Image
-                      src={src}
-                      alt="Landing Page Example"
-                      fill
-                      className="h-full w-full object-cover"
-                      sizes="(max-width: 768px) 200px, 280px"
-                    />
-                  </div>
-                )
-              )}
+              {[
+                ...LANDING_PAGE_EXAMPLES,
+                ...LANDING_PAGE_EXAMPLES,
+                ...LANDING_PAGE_EXAMPLES,
+              ].map((src, i) => (
+                <div
+                  key={i}
+                  className="relative h-[140px] w-[200px] flex-shrink-0 cursor-pointer overflow-hidden rounded-xl border border-[#004225]/10 shadow-md transition-transform duration-700 hover:scale-110 md:h-[180px] md:w-[240px] md:rounded-2xl lg:h-[210px] lg:w-[280px]"
+                >
+                  <Image
+                    src={src}
+                    alt="Landing Page Example"
+                    fill
+                    className="h-full w-full object-cover"
+                    sizes="(max-width: 768px) 200px, 280px"
+                  />
+                </div>
+              ))}
             </div>
             {/* Duplicated marquee for seamless loop */}
             <div className="animate-marquee2 absolute left-full top-0 flex gap-4 whitespace-nowrap pl-4">

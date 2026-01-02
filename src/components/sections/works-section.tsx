@@ -18,46 +18,42 @@ import Image from "next/image"
 const WORKS = [
   {
     id: 1,
-    title: "Vantage Trading",
-    category: "Fintech MVP",
+    title: "Grytt",
+    category: "Fitness Accountability OS",
     description:
-      "A high-frequency trading dashboard built for data-heavy institutional investors. We reduced latency by 40% and designed a clutter-free interface that processes millions of data points in real-time.",
-    image:
-      "https://images.unsplash.com/photo-1642543492481-44e81e3914a7?auto=format&fit=crop&q=80&w=1600&h=1200",
-    tags: ["MVP Development", "React", "Real-time Data"],
+      "A performance-first fitness operating system designed to close the loop between serious lifters and online trainers. We built a friction-free logging experience that replaces bloated apps and spreadsheets, giving trainers a clean command center to turn daily client habits into scalable data.",
+    image: "/images/w1.png",
+    tags: ["MVP Development", "Product Design", "Full-Stack Build"],
     link: "#",
   },
   {
     id: 2,
-    title: "Lumina Health",
-    category: "Telehealth Platform",
+    title: "Elite Project Group",
+    category: "Global Sports Agency",
     description:
-      "End-to-end telemedicine platform connecting patients with specialists. Features include secure video conferencing, automated prescription routing, and AI-assisted symptom checking.",
-    image:
-      "https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?auto=format&fit=crop&q=80&w=1600&h=1200",
-    tags: ["Web Design", "Mobile App", "HIPAA Compliant"],
-    link: "#",
+      "A definitive digital presence for a top-5 global football agency. We handled the end-to-end journey from high-impact UI/UX design to pixel-perfect Webflow development, delivering a platform that matches the prestige of their world-class talent roster.",
+    image: "/images/w2.png",
+    tags: ["Webflow Development", "UI/UX Design", "Sports Tech"],
+    link: "https://eliteprojectgroup.co.uk/",
   },
   {
     id: 3,
-    title: "EcoSphere",
-    category: "SaaS Marketplace",
+    title: "Zash",
+    category: "On-Demand Detailing App",
     description:
-      "A multi-vendor marketplace for sustainable supply chains. We built the complete infrastructure, from vendor onboarding automation to a complex carbon-offset calculation engine.",
-    image:
-      "https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&q=80&w=1600&h=1200",
-    tags: ["Web Development", "Automation", "SaaS"],
-    link: "#",
+      "We engineered the complete brand and mobile ecosystem for Zash, an on-demand car detailing service. From the logo and identity to the immaculate mobile app, we created a seamless user experience that reflects their speed and precision—delivering a clean interface for a clean service.",
+    image: "/images/w3.jpg",
+    tags: ["Mobile App Development", "Brand Identity", "End-to-End Build"],
+    link: "https://growthbae.com/works/zash",
   },
   {
     id: 4,
-    title: "Propel AI",
-    category: "Marketing Automation",
+    title: "Enterprise Agentic Architectures",
+    category: "Cross-Vertical AI Infrastructure",
     description:
-      "An AI-powered content generation engine for enterprise marketing teams. We built custom LLM pipelines to generate on-brand social copy, blog posts, and email newsletters at scale.",
-    image:
-      "https://images.unsplash.com/photo-1677442136019-21780ecad995?auto=format&fit=crop&q=80&w=1600&h=1200",
-    tags: ["Generative AI", "Python", "Enterprise"],
+      "A suite of production-grade agentic workflows deployed for legal and fitness ecosystems. We engineered robust orchestration layers—spanning document ingestion, multimodal RAG, and planner-supervisor controls—to prevent drift and ensure stability across complex, long-running tasks.",
+    image: "/images/w4.png",
+    tags: ["Multimodal RAG", "Agent Orchestration", "System Architecture"],
     link: "#",
   },
 ]
@@ -109,13 +105,6 @@ export function WorksSection() {
                 <div className="grid items-center gap-3 md:gap-4 lg:grid-cols-2 lg:gap-8">
                   {/* Image Side (Browser Frame Style) */}
                   <div className="group relative aspect-[4/3] min-h-[160px] overflow-hidden rounded-xl border border-[#004225]/10 bg-[#F5F1E5] md:min-h-[200px] lg:aspect-auto lg:h-full lg:min-h-[240px]">
-                    {/* Browser Dots */}
-                    <div className="absolute left-2 top-2 z-10 flex gap-1.5 md:left-3 md:top-3 lg:left-4 lg:top-4">
-                      <div className="h-2 w-2 rounded-full bg-[#FF5F56] md:h-2.5 md:w-2.5 lg:h-3 lg:w-3" />
-                      <div className="h-2 w-2 rounded-full bg-[#FFBD2E] md:h-2.5 md:w-2.5 lg:h-3 lg:w-3" />
-                      <div className="h-2 w-2 rounded-full bg-[#27C93F] md:h-2.5 md:w-2.5 lg:h-3 lg:w-3" />
-                    </div>
-
                     {/* Image */}
                     <Image
                       src={work.image}

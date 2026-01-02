@@ -1,7 +1,7 @@
 "use client"
 
 import { motion } from "framer-motion"
-import { Rocket, Zap, Layers, Sparkles, ArrowUpRight } from "lucide-react"
+import { Rocket, ArrowUpRight, Instagram, Linkedin } from "lucide-react"
 import { Container } from "@/components/ui/container"
 import { Button } from "@/components/ui/button"
 import Link from "next/link"
@@ -13,33 +13,6 @@ import Link from "next/link"
  * CTA: "Book a Call"
  * Bottom navigation and legal links
  */
-
-function FloatingPill({
-  icon: Icon,
-  text,
-  className,
-  delay,
-}: {
-  icon: React.ComponentType<{ className?: string }>
-  text: string
-  className: string
-  delay: number
-}) {
-  return (
-    <motion.div
-      animate={{ y: [0, -10, 0] }}
-      transition={{ duration: 4, repeat: Infinity, ease: "easeInOut", delay }}
-      className={`absolute ${className} z-20 flex items-center gap-1.5 rounded-xl border border-[#F5F1E5]/10 bg-[#004225] px-2 py-1 shadow-lg shadow-[#004225]/20 md:rounded-2xl md:px-3 md:py-1.5`}
-    >
-      <div className="rounded-md bg-[#0B6E4F] p-1 md:rounded-lg md:p-1.5">
-        <Icon className="h-2.5 w-2.5 text-white md:h-3 md:w-3" />
-      </div>
-      <span className="text-[9px] font-bold uppercase tracking-wider text-[#F5F1E5] md:text-[10px]">
-        {text}
-      </span>
-    </motion.div>
-  )
-}
 
 export function Footer() {
   return (
@@ -82,25 +55,6 @@ export function Footer() {
               {/* Inner Glow */}
               <div className="absolute inset-0 -z-10 rounded-2xl bg-[#0B6E4F]/5 blur-xl md:rounded-3xl" />
             </div>
-            {/* Orbiting Pills */}
-            <FloatingPill
-              icon={Zap}
-              text="Shipped in Weeks"
-              className="-top-6 right-0 md:-top-4 md:right-4"
-              delay={0}
-            />
-            <FloatingPill
-              icon={Layers}
-              text="Scalable Systems"
-              className="-left-3 top-1/2 md:-left-12"
-              delay={1.5}
-            />
-            <FloatingPill
-              icon={Sparkles}
-              text="AI-Native Build"
-              className="bottom-0 right-2 md:bottom-6 md:right-6"
-              delay={0.5}
-            />
 
             {/* Decorative Blur */}
             <div className="absolute left-1/2 top-1/2 -z-10 h-48 w-48 -translate-x-1/2 -translate-y-1/2 rounded-full bg-gradient-to-br from-[#0B6E4F]/20 to-transparent blur-3xl md:h-64 md:w-64" />
