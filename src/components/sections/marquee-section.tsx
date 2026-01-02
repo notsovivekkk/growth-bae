@@ -26,7 +26,7 @@ export function MarqueeSection() {
       id="works-marquee"
     >
       <div className="group relative flex overflow-x-hidden px-4">
-        <div className="animate-marquee flex gap-4 whitespace-nowrap">
+        <div className="animate-marquee [animation-duration:40s] flex gap-4 whitespace-nowrap">
           {[...MARQUEE_IMAGES, ...MARQUEE_IMAGES, ...MARQUEE_IMAGES].map(
             (item, i) => (
               <div
@@ -45,7 +45,7 @@ export function MarqueeSection() {
           )}
         </div>
         {/* Duplicated marquee for seamless loop */}
-        <div className="animate-marquee2 absolute left-full top-0 flex gap-4 whitespace-nowrap pl-4">
+        <div className="animate-marquee2 [animation-duration:40s] absolute left-full top-0 flex gap-4 whitespace-nowrap pl-4">
           {[...MARQUEE_IMAGES, ...MARQUEE_IMAGES].map((item, i) => (
             <div
               key={`dup-${i}`}

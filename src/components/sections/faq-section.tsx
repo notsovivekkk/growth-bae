@@ -149,7 +149,7 @@ export function FAQSection() {
             </span>
             FAQ
           </div>
-          <h2 className="mb-2 text-xl font-bold text-[#004225] md:mb-3 md:text-2xl lg:text-3xl xl:text-4xl">
+          <h2 className="mb-2 text-4xl font-bold text-[#004225] md:mb-3 md:text-2xl lg:text-3xl xl:text-4xl">
             Common questions.{" "}
             <span className="font-serif italic text-[#0B6E4F]">
               Clear answers.
@@ -174,7 +174,7 @@ export function FAQSection() {
                 onClick={() => setOpenIndex(openIndex === index ? null : index)}
                 className="group flex w-full items-center justify-between px-3 py-2.5 text-left transition-colors hover:bg-[#F5F1E5]/30 md:px-4 md:py-3 lg:px-6"
               >
-                <span className="pr-3 text-xs font-bold text-[#004225] transition-colors group-hover:text-[#0B6E4F] md:pr-4 md:text-sm lg:text-[15px]">
+                <span className="pr-3 text-base font-bold text-[#004225] transition-colors group-hover:text-[#0B6E4F] md:pr-4 md:text-sm lg:text-[15px]">
                   {faq.question}
                 </span>
                 <span

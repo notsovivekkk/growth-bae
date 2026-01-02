@@ -148,11 +148,11 @@ export function ProcessSection() {
     <Section className="bg-[#F5F1E5] !pt-4 md:!pt-6" id="process">
       <Container>
         <div className="mb-8 text-center md:mb-12 lg:mb-16">
-          <span className="mb-3 block text-xs font-bold uppercase tracking-wider text-[#0B6E4F] md:mb-4 md:text-sm">
+          <span className="mb-3 block rounded-full bg-[#004225]/5 px-4 py-2 text-sm font-medium text-[#004225] md:mb-4">
             The Process
           </span>
-          <h2 className="text-xl font-bold text-[#004225] md:text-2xl lg:text-4xl">
-            How we scale <span className="font-serif italic">success</span>
+          <h2 className="mt-6 text-4xl font-bold text-[#004225] md:text-4xl lg:text-5xl">
+            Your roadmap to <span className="font-serif italic">shipping.</span>
           </h2>
         </div>
 

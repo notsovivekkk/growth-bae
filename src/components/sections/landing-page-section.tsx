@@ -50,7 +50,7 @@ export function LandingPageSection() {
               </span>
               Landing Page Design
             </div>
-            <h2 className="mb-3 text-2xl font-bold leading-tight text-[#004225] md:mb-4 md:text-3xl lg:text-4xl xl:text-5xl">
+            <h2 className="mb-3 text-4xl font-bold leading-tight text-[#004225] md:mb-4 md:text-3xl lg:text-4xl xl:text-5xl">
               Landing Pages That Actually{" "}
               <span className="font-serif italic text-[#0B6E4F]">Convert.</span>
             </h2>
@@ -75,13 +75,15 @@ export function LandingPageSection() {
               ))}
             </div>
           </div>
-          <Link
-            href="#"
-            className="inline-flex !h-9 shrink-0 items-center justify-center gap-1.5 rounded-full bg-[#004225] !px-5 text-xs font-medium text-[#F5F1E5] shadow-lg transition-all hover:scale-105 hover:bg-[#0B6E4F] md:!h-10 md:!px-6 md:text-sm lg:!h-11 lg:!px-8"
+          <a
+            href="https://tally.so/r/44Jrpb"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex !h-9 shrink-0 items-center justify-center gap-1.5 rounded-full bg-[#004225] !px-5 text-xs font-medium text-[#F5F1E5] shadow-lg transition-all hover:scale-105 hover:bg-[#0B6E4F] hover:text-[#F5F1E5] md:!h-10 md:!px-6 md:text-sm lg:!h-11 lg:!px-8"
           >
             Build a landing page{" "}
             <ArrowRight className="h-3.5 w-3.5 md:h-4 md:w-4" />
-          </Link>
+          </a>
         </div>
 
         {/* Landing Page Image Marquee */}
@@ -92,7 +94,7 @@ export function LandingPageSection() {
             {/* Right fade gradient */}
             <div className="pointer-events-none absolute right-0 top-0 z-10 h-full w-32 bg-gradient-to-l from-[#F5F1E5] to-transparent" />
 
-            <div className="animate-marquee flex gap-4 whitespace-nowrap">
+            <div className="animate-marquee [animation-duration:60s] flex gap-4 whitespace-nowrap">
               {[
                 ...LANDING_PAGE_EXAMPLES,
                 ...LANDING_PAGE_EXAMPLES,
@@ -113,7 +115,7 @@ export function LandingPageSection() {
               ))}
             </div>
             {/* Duplicated marquee for seamless loop */}
-            <div className="animate-marquee2 absolute left-full top-0 flex gap-4 whitespace-nowrap pl-4">
+            <div className="animate-marquee2 [animation-duration:60s] absolute left-full top-0 flex gap-4 whitespace-nowrap pl-4">
               {[...LANDING_PAGE_EXAMPLES, ...LANDING_PAGE_EXAMPLES].map(
                 (src, i) => (
                   <div

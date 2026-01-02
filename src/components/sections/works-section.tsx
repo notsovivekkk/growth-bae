@@ -71,16 +71,16 @@ export function WorksSection() {
             </span>
             SELECTED SHIPMENTS
           </div>
-          <h2 className="mb-4 text-2xl font-bold leading-tight text-[#004225] md:mb-6 md:text-3xl lg:text-5xl">
-            We don't just build. <br />
-            We launch{" "}
+          <h2 className="mb-4 text-4xl font-bold leading-tight text-[#004225] md:mb-6 md:text-3xl lg:text-5xl">
+            Built with the care of a{" "}
             <span className="font-serif italic text-[#0B6E4F]">
-              category leaders.
+              co-founder.
             </span>
           </h2>
           <p className="mx-auto max-w-xl text-sm text-[#004225]/60 md:text-base">
-            From back-of-napkin sketches to revenue-generating products. Here is
-            a selection of MVPs and systems we've shipped recently.
+            Handing over your vision is difficult. We honor that trust by
+            shipping clean, resilient products that don't just look good, but
+            survive the real world.
           </p>
         </div>
 
@@ -120,12 +120,6 @@ export function WorksSection() {
                       <span className="text-[10px] font-bold uppercase tracking-wider text-[#0B6E4F] md:text-xs">
                         {work.category}
                       </span>
-                      <a
-                        href={work.link}
-                        className="group flex h-8 w-8 items-center justify-center rounded-full border border-[#004225]/10 text-[#004225] transition-all duration-300 hover:bg-[#004225] hover:text-white md:h-10 md:w-10 lg:h-12 lg:w-12"
-                      >
-                        <ArrowUpRight className="h-3.5 w-3.5 transition-transform group-hover:rotate-45 md:h-4 md:w-4 lg:h-5 lg:w-5" />
-                      </a>
                     </div>
                     <h3 className="mb-2 text-lg font-bold text-[#004225] md:mb-3 md:text-xl lg:text-2xl">
                       {work.title}

@@ -22,6 +22,10 @@
     /* Prevent horizontal scroll */
     overflow-x: hidden;
     width: 100%;
+
+    /* Smooth Scrolling & Navbar Offset */
+    scroll-behavior: smooth;
+    scroll-padding-top: 100px;
   }
 
   body {

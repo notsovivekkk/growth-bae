@@ -21,7 +21,7 @@ export function HeroSection() {
       padding="none"
       className={cn(
         "relative flex min-h-[90vh] flex-col justify-center overflow-hidden bg-[#F3F1E6] md:min-h-screen",
-        "pb-6 pt-12 md:pb-12 md:pt-20"
+        "pb-6 pt-40 md:pb-12 md:pt-48"
       )}
       id="home"
     >
@@ -49,14 +49,14 @@ export function HeroSection() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.1 }}
             className={cn(
-              "mb-4 text-3xl font-semibold leading-none tracking-tighter text-[#064e3b] md:text-5xl lg:text-6xl"
+              "mb-4 text-4xl font-semibold leading-none tracking-tighter text-[#064e3b] md:text-5xl lg:text-6xl"
             )}
           >
             Build{" "}
             <span className="bg-gradient-to-r from-[#064e3b] to-[#0B6E4F] bg-clip-text text-transparent">
               MVPs
             </span>{" "}
-            and systems that actually{" "}
+            and AI systems that actually{" "}
             <span className="font-serif italic">scale.</span>
           </motion.h1>
 
@@ -78,16 +78,18 @@ export function HeroSection() {
             transition={{ duration: 0.6, delay: 0.3 }}
             className="flex flex-col gap-4 sm:flex-row"
           >
-            <Link
-              href="#"
+            <a
+              href="https://tally.so/r/44Jrpb"
+              target="_blank"
+              rel="noopener noreferrer"
               className={cn(
                 "inline-flex items-center justify-center gap-2",
                 "rounded-full px-5 py-2.5 text-sm font-medium transition-all duration-300",
-                "bg-[#004225] text-[#F5F1E5] shadow-xl shadow-[#0B6E4F]/20 hover:scale-105 hover:bg-[#0B6E4F] hover:shadow-2xl"
+                "bg-[#004225] text-[#F5F1E5] shadow-xl shadow-[#0B6E4F]/20 hover:scale-105 hover:bg-[#0B6E4F] hover:text-[#F5F1E5] hover:shadow-2xl"
               )}
             >
               Start Your Growth <ArrowRight className="ml-2 h-4 w-4" />
-            </Link>
+            </a>
           </motion.div>
         </div>
       </Container>

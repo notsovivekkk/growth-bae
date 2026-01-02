@@ -52,15 +52,15 @@ export function ServicesSection() {
         </div>
 
         {/* Headline */}
-        <h2 className="mb-4 text-2xl font-bold leading-tight text-[#004225] md:text-4xl lg:text-5xl">
-          We build every kind of <br />
-          MVP <span className="font-serif italic text-[#0B6E4F]">faaaast</span>
+        <h2 className="mb-4 text-4xl font-bold leading-tight text-[#004225] md:text-4xl lg:text-5xl">
+          We build with <span className="font-serif italic">Velocity</span>, not
+          Speed.
         </h2>
 
         {/* Subtext */}
         <p className="mx-auto mb-8 max-w-2xl text-sm text-[#004225]/60 md:mb-16 md:text-lg">
-          4+ years of industry experience in building, shaping and shipping
-          products.
+          Moving fast without direction is just chaos. We don't just ship code. We
+          ship leverage.
         </p>
 
         {/* Improved Showcase Grid */}
