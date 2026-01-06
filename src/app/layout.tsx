@@ -57,22 +57,19 @@ const playfairDisplay = Playfair_Display({
 })
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://growthbae.com"),
   title: {
-    default: "Growthbae — We build MVPs & AI systems",
-    template: "%s | Growthbae",
+    default: siteConfig.name,
+    template: `%s | ${siteConfig.name}`,
   },
-  description:
-    "Founder-first MVP and AI systems development. We build proof-of-concepts, AI products, and scalable SaaS for startups that need to ship fast.",
+  description: siteConfig.description,
   keywords: [
-    "MVP development",
-    "AI product studio",
-    "startup MVP",
-    "AI systems",
-    "SaaS development",
-    "founder build studio",
-    "rapid prototyping",
-    "AI product development",
+    "Growth",
+    "Marketing",
+    "Strategy",
+    "Case Studies",
+    "Premium",
+    "Next.js",
+    "TypeScript",
   ],
   authors: [
     {
@@ -81,54 +78,30 @@ export const metadata: Metadata = {
     },
   ],
   creator: "GrowthBae",
-  robots: {
-    index: true,
-    follow: true,
-  },
   openGraph: {
     type: "website",
     locale: "en_US",
     url: siteConfig.url,
-    title: "Growthbae — We build MVPs & AI systems",
-    description:
-      "Founder-first MVP and AI systems development. We build proof-of-concepts, AI products, and scalable SaaS for startups that need to ship fast.",
-    siteName: "Growthbae",
+    title: siteConfig.name,
+    description: siteConfig.description,
+    siteName: siteConfig.name,
     images: [
       {
-        url: "/og-image.png",
+        url: siteConfig.ogImage,
         width: 1200,
         height: 630,
-        alt: "Growthbae",
+        alt: siteConfig.name,
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Growthbae — We build MVPs & AI systems",
-    description:
-      "Founder-first MVP and AI systems development. We build proof-of-concepts, AI products, and scalable SaaS for startups that need to ship fast.",
-    images: ["/og-image.png"],
+    title: siteConfig.name,
+    description: siteConfig.description,
     creator: "@growthbae",
   },
   icons: {
-    icon: [
-      { url: "/images/favicon_io/favicon-16x16.png", sizes: "16x16", type: "image/png" },
-      { url: "/images/favicon_io/favicon-32x32.png", sizes: "32x32", type: "image/png" },
-      { url: "/images/favicon_io/favicon.ico", sizes: "any" },
-    ],
-    apple: [
-      { url: "/images/favicon_io/apple-touch-icon.png", sizes: "180x180", type: "image/png" },
-    ],
-    other: [
-      {
-        rel: "android-chrome-192x192",
-        url: "/images/favicon_io/android-chrome-192x192.png",
-      },
-      {
-        rel: "android-chrome-512x512",
-        url: "/images/favicon_io/android-chrome-512x512.png",
-      },
-    ],
+    icon: "/favicon.ico",
   },
   manifest: "/site.webmanifest",
 }
