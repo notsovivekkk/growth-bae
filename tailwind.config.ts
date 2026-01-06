@@ -179,7 +179,7 @@ const config = {
       "fade-in-up": "fadeInUp 0.8s ease-out forwards",
       scroll: "scroll 45s linear infinite",
       shine: "shine 2s infinite",
-      fill: "fillWidth 1.5s ease-out forwards",
+      "fill-width": "fillWidth 1.5s ease-out forwards",
       "fill-bar": "fillBar 1.5s cubic-bezier(0.16, 1, 0.3, 1) forwards",
     },
     keyframes: {
