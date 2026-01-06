@@ -57,19 +57,22 @@ const playfairDisplay = Playfair_Display({
 })
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://growthbae.com"),
   title: {
-    default: siteConfig.name,
-    template: `%s | ${siteConfig.name}`,
+    default: "Growthbae — We build MVPs & AI systems",
+    template: "%s | Growthbae",
   },
-  description: siteConfig.description,
+  description:
+    "Founder-first MVP and AI systems development. We build proof-of-concepts, AI products, and scalable SaaS for startups that need to ship fast.",
   keywords: [
-    "Growth",
-    "Marketing",
-    "Strategy",
-    "Case Studies",
-    "Premium",
-    "Next.js",
-    "TypeScript",
+    "MVP development",
+    "AI product studio",
+    "startup MVP",
+    "AI systems",
+    "SaaS development",
+    "founder build studio",
+    "rapid prototyping",
+    "AI product development",
   ],
   authors: [
     {
@@ -78,30 +81,54 @@ export const metadata: Metadata = {
     },
   ],
   creator: "GrowthBae",
+  robots: {
+    index: true,
+    follow: true,
+  },
   openGraph: {
     type: "website",
     locale: "en_US",
     url: siteConfig.url,
-    title: siteConfig.name,
-    description: siteConfig.description,
-    siteName: siteConfig.name,
+    title: "Growthbae — We build MVPs & AI systems",
+    description:
+      "Founder-first MVP and AI systems development. We build proof-of-concepts, AI products, and scalable SaaS for startups that need to ship fast.",
+    siteName: "Growthbae",
     images: [
       {
-        url: siteConfig.ogImage,
+        url: "/og-image.png",
         width: 1200,
         height: 630,
-        alt: siteConfig.name,
+        alt: "Growthbae",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: siteConfig.name,
-    description: siteConfig.description,
+    title: "Growthbae — We build MVPs & AI systems",
+    description:
+      "Founder-first MVP and AI systems development. We build proof-of-concepts, AI products, and scalable SaaS for startups that need to ship fast.",
+    images: ["/og-image.png"],
     creator: "@growthbae",
   },
   icons: {
-    icon: "/favicon.ico",
+    icon: [
+      { url: "/images/favicon_io/favicon-16x16.png", sizes: "16x16", type: "image/png" },
+      { url: "/images/favicon_io/favicon-32x32.png", sizes: "32x32", type: "image/png" },
+      { url: "/images/favicon_io/favicon.ico", sizes: "any" },
+    ],
+    apple: [
+      { url: "/images/favicon_io/apple-touch-icon.png", sizes: "180x180", type: "image/png" },
+    ],
+    other: [
+      {
+        rel: "android-chrome-192x192",
+        url: "/images/favicon_io/android-chrome-192x192.png",
+      },
+      {
+        rel: "android-chrome-512x512",
+        url: "/images/favicon_io/android-chrome-512x512.png",
+      },
+    ],
   },
   manifest: "/site.webmanifest",
 }

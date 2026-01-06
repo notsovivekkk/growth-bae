@@ -18,10 +18,9 @@ import { siteConfig } from "@/config/site"
  */
 
 const navigation = [
-  { name: "Home", href: "#home" },
-  { name: "Process", href: "#process" },
-  { name: "Services", href: "#services" },
-  { name: "Works", href: "#works" },
+  { name: "Services", href: "/services" },
+  { name: "Process", href: "/process" },
+  { name: "Work", href: "/work" },
 ]
 
 export function Header() {

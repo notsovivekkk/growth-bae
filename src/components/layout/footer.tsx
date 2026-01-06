@@ -104,15 +104,24 @@ export function Footer() {
 
           {/* 2. Navigation Links (Center) */}
           <div className="order-1 flex flex-row flex-nowrap justify-center gap-3 md:order-2 md:gap-8">
-            {["Home", "Process", "Services", "Works"].map((item) => (
-              <a
-                key={item}
-                href={`#${item.toLowerCase()}`}
-                className="text-xs font-medium text-[#004225]/80 transition-colors hover:text-[#0B6E4F] md:text-sm"
-              >
-                {item}
-              </a>
-            ))}
+            <Link
+              href="/services"
+              className="text-xs font-medium text-[#004225]/80 transition-colors hover:text-[#0B6E4F] md:text-sm"
+            >
+              Services
+            </Link>
+            <Link
+              href="/process"
+              className="text-xs font-medium text-[#004225]/80 transition-colors hover:text-[#0B6E4F] md:text-sm"
+            >
+              Process
+            </Link>
+            <Link
+              href="/work"
+              className="text-xs font-medium text-[#004225]/80 transition-colors hover:text-[#0B6E4F] md:text-sm"
+            >
+              Work
+            </Link>
           </div>
 
           {/* 3. Social Icons (Right on Desktop, Middle on Mobile) */}
