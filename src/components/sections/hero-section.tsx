@@ -6,6 +6,7 @@ import { Container } from "@/components/ui/container"
 import { Section } from "@/components/ui/section"
 import Link from "next/link"
 import { cn } from "@/lib/utils"
+import { siteConfig } from "@/config/site"
 
 /**
  * Hero Section
@@ -79,7 +80,7 @@ export function HeroSection() {
             className="flex flex-col gap-4 sm:flex-row"
           >
             <a
-              href="https://tally.so/r/44Jrpb"
+              href={siteConfig.forms.contact}
               target="_blank"
               rel="noopener noreferrer"
               className={cn(
