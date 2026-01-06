@@ -85,6 +85,14 @@ export const metadata: Metadata = {
     title: siteConfig.name,
     description: siteConfig.description,
     siteName: siteConfig.name,
+    images: [
+      {
+        url: siteConfig.ogImage,
+        width: 1200,
+        height: 630,
+        alt: siteConfig.name,
+      },
+    ],
   },
   twitter: {
     card: "summary_large_image",
@@ -98,6 +106,21 @@ export const metadata: Metadata = {
   manifest: "/site.webmanifest",
 }
 
+// Structured data for SEO
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  name: siteConfig.name,
+  url: siteConfig.url,
+  logo: `${siteConfig.url}/images/logo.JPG`,
+  description: siteConfig.description,
+  sameAs: [
+    siteConfig.links.twitter,
+    siteConfig.links.linkedin,
+    siteConfig.links.github,
+  ],
+}
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -105,6 +128,12 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" suppressHydrationWarning>
+      <head>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        />
+      </head>
       <body
         className={cn(
           // GBAE Design System
@@ -117,6 +146,13 @@ export default function RootLayout({
           playfairDisplay.variable
         )}
       >
+        {/* Skip to main content link for accessibility */}
+        <a
+          href="#main-content"
+          className="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-50 focus:rounded-md focus:bg-[#004225] focus:px-4 focus:py-2 focus:text-[#F5F1E5] focus:outline-none focus:ring-2 focus:ring-[#0B6E4F] focus:ring-offset-2"
+        >
+          Skip to main content
+        </a>
         {children}
       </body>
     </html>

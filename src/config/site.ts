@@ -14,6 +14,10 @@ export const siteConfig = {
     github: "https://github.com/growthbae",
     linkedin: "https://linkedin.com/company/growthbae",
   },
+  forms: {
+    contact:
+      process.env.NEXT_PUBLIC_TALLY_FORM_URL || "https://tally.so/r/44Jrpb",
+  },
 }
 
 export type SiteConfig = typeof siteConfig

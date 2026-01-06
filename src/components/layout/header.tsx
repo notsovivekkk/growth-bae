@@ -7,6 +7,7 @@ import { Logo } from "@/components/ui/logo"
 import { Button } from "@/components/ui/button"
 import { cn } from "@/lib/utils"
 import Link from "next/link"
+import { siteConfig } from "@/config/site"
 
 /**
  * Header Component
@@ -58,16 +59,11 @@ export function Header() {
       <Container>
         <div className="flex items-center justify-between">
           {/* Logo */}
-          <Link
+          <Logo
             href="#home"
-            className="relative z-50 flex items-center justify-center transition-opacity hover:opacity-90"
-          >
-            <Logo
-              href="/"
-              size="sm"
-              className="!h-10 !w-10 md:!h-14 md:!w-14 [&>a>div]:!h-10 [&>a>div]:!w-10 [&>a>div]:md:!h-14 [&>a>div]:md:!w-14 [&>div]:!h-10 [&>div]:!w-10 [&>div]:md:!h-14 [&>div]:md:!w-14 [&_img]:!h-full [&_img]:!w-auto [&_img]:!max-w-full"
-            />
-          </Link>
+            size="sm"
+            className="relative z-50 !h-10 !w-10 md:!h-14 md:!w-14 [&>a>div]:!h-10 [&>a>div]:!w-10 [&>a>div]:md:!h-14 [&>a>div]:md:!w-14 [&>div]:!h-10 [&>div]:!w-10 [&>div]:md:!h-14 [&>div]:md:!w-14 [&_img]:!h-full [&_img]:!w-auto [&_img]:!max-w-full"
+          />
 
           {/* Desktop Navigation */}
           <nav className="hidden items-center gap-6 md:flex">
@@ -81,7 +77,7 @@ export function Header() {
               </Link>
             ))}
             <a
-              href="https://tally.so/r/44Jrpb"
+              href={siteConfig.forms.contact}
               target="_blank"
               rel="noopener noreferrer"
               className="inline-block"
@@ -189,7 +185,7 @@ export function Header() {
 
                     {/* CTA Button */}
                     <a
-                      href="https://tally.so/r/44Jrpb"
+                      href={siteConfig.forms.contact}
                       target="_blank"
                       rel="noopener noreferrer"
                       className="inline-block w-full"

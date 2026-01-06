@@ -7,6 +7,7 @@ import { Section } from "@/components/ui/section"
 import Image from "next/image"
 import Link from "next/link"
 import React from "react"
+import { siteConfig } from "@/config/site"
 
 /**
  * Landing Page Section
@@ -76,7 +77,7 @@ export function LandingPageSection() {
             </div>
           </div>
           <a
-            href="https://tally.so/r/44Jrpb"
+            href={siteConfig.forms.contact}
             target="_blank"
             rel="noopener noreferrer"
             className="inline-flex !h-9 shrink-0 items-center justify-center gap-1.5 rounded-full bg-[#004225] !px-5 text-xs font-medium text-[#F5F1E5] shadow-lg transition-all hover:scale-105 hover:bg-[#0B6E4F] hover:text-[#F5F1E5] md:!h-10 md:!px-6 md:text-sm lg:!h-11 lg:!px-8"

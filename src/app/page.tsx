@@ -21,7 +21,7 @@ export default function Home() {
   return (
     <div className="min-h-screen bg-[#F5F1E5] font-sans selection:bg-[#0B6E4F] selection:text-white">
       <Header />
-      <main>
+      <main id="main-content">
         <HeroSection />
         <MarqueeSection />
         <WhyGrowthbaeSection />

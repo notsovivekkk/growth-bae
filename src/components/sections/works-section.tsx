@@ -28,6 +28,16 @@ const WORKS = [
   },
   {
     id: 2,
+    title: "Enterprise Agentic Architectures",
+    category: "Cross-Vertical AI Infrastructure",
+    description:
+      "A suite of production-grade agentic workflows deployed for legal and fitness ecosystems. We engineered robust orchestration layers—spanning document ingestion, multimodal RAG, and planner-supervisor controls—to prevent drift and ensure stability across complex, long-running tasks.",
+    image: "/images/w4.png",
+    tags: ["Multimodal RAG", "Agent Orchestration", "System Architecture"],
+    link: "#",
+  },
+  {
+    id: 3,
     title: "Elite Project Group",
     category: "Global Sports Agency",
     description:
@@ -37,7 +47,7 @@ const WORKS = [
     link: "https://eliteprojectgroup.co.uk/",
   },
   {
-    id: 3,
+    id: 4,
     title: "Zash",
     category: "On-Demand Detailing App",
     description:
@@ -45,16 +55,6 @@ const WORKS = [
     image: "/images/w3.jpg",
     tags: ["Mobile App Development", "Brand Identity", "End-to-End Build"],
     link: "https://growthbae.com/works/zash",
-  },
-  {
-    id: 4,
-    title: "Enterprise Agentic Architectures",
-    category: "Cross-Vertical AI Infrastructure",
-    description:
-      "A suite of production-grade agentic workflows deployed for legal and fitness ecosystems. We engineered robust orchestration layers—spanning document ingestion, multimodal RAG, and planner-supervisor controls—to prevent drift and ensure stability across complex, long-running tasks.",
-    image: "/images/w4.png",
-    tags: ["Multimodal RAG", "Agent Orchestration", "System Architecture"],
-    link: "#",
   },
 ]
 

@@ -1,0 +1,18 @@
+{
+  "name": "GrowthBae",
+  "short_name": "GrowthBae",
+  "description": "Premium growth strategies and case studies that drive results",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#F5F1E5",
+  "theme_color": "#004225",
+  "orientation": "portrait-primary",
+  "icons": [
+    {
+      "src": "/favicon.ico",
+      "sizes": "any",
+      "type": "image/x-icon"
+    }
+  ]
+}
+

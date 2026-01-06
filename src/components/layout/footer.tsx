@@ -5,6 +5,7 @@ import { Rocket, ArrowUpRight, Instagram, Linkedin } from "lucide-react"
 import { Container } from "@/components/ui/container"
 import { Button } from "@/components/ui/button"
 import Link from "next/link"
+import { siteConfig } from "@/config/site"
 
 /**
  * Footer Component
@@ -38,7 +39,7 @@ export function Footer() {
             </p>
             <div className="flex justify-center lg:justify-start">
               <a
-                href="https://tally.so/r/44Jrpb"
+                href={siteConfig.forms.contact}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-block"
