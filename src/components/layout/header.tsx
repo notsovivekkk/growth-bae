@@ -1,39 +1,42 @@
 "use client"
 
 import { useState, useEffect } from "react"
-import { motion } from "framer-motion"
+import { motion, AnimatePresence } from "framer-motion"
 import { Container } from "@/components/ui/container"
 import { Logo } from "@/components/ui/logo"
-import { NavLink } from "@/components/ui/nav-link"
-import { Menu, X } from "lucide-react"
+import { Button } from "@/components/ui/button"
 import { cn } from "@/lib/utils"
+import Link from "next/link"
 
 /**
- * GBAE Header Component (Molecule)
- * Fully responsive navigation with mobile menu
- * Mobile-first: hamburger menu on mobile, full nav on desktop
- * Includes scroll detection for dynamic styling
+ * Header Component
+ * Navigation with Home, Process, Services, Works
+ * Includes "Book a Call" button
+ * Scroll detection with glassmorphism effect
+ * Full-screen mobile menu overlay with scroll lock
  */
 
 const navigation = [
-  { name: "About", href: "#about" },
-  { name: "Work", href: "#work" },
-  { name: "Contact", href: "#contact" },
+  { name: "Home", href: "#home" },
+  { name: "Process", href: "#process" },
+  { name: "Services", href: "#services" },
+  { name: "Works", href: "#works" },
 ]
 
 export function Header() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
   const [isScrolled, setIsScrolled] = useState(false)
 
-  // Handle scroll for navbar styling
+  // Handle scroll for navbar styling (glassmorphism effect)
   useEffect(() => {
     const handleScroll = () => {
-      setIsScrolled(window.scrollY > 20)
+      setIsScrolled(window.scrollY > 50)
     }
 
     window.addEventListener("scroll", handleScroll)
     return () => window.removeEventListener("scroll", handleScroll)
   }, [])
+
 
   const toggleMobileMenu = () => {
     setIsMobileMenuOpen(!isMobileMenuOpen)
@@ -46,66 +49,167 @@ export function Header() {
   return (
     <header
       className={cn(
-        "fixed left-0 right-0 top-0 z-50 transition-all duration-300",
+        "fixed left-0 top-0 z-50 w-full transition-all duration-300",
         isScrolled
-          ? "border-b border-primary/5 bg-secondary/90 py-1 backdrop-blur-md"
-          : "bg-transparent py-1.5"
+          ? "border-b border-[#004225]/10 bg-[#F5F1E5]/90 py-4 shadow-sm backdrop-blur-md"
+          : "bg-transparent py-6"
       )}
     >
       <Container>
-        <div className="flex h-10 items-center justify-between sm:h-11 lg:h-12">
+        <div className="flex items-center justify-between">
           {/* Logo */}
-          <Logo href="/" size="md" className="relative z-50 flex-shrink-0" />
+          <Link
+            href="#home"
+            className="relative z-50 flex items-center justify-center transition-opacity hover:opacity-90"
+          >
+            <Logo
+              href="/"
+              size="sm"
+              className="!h-10 !w-10 md:!h-14 md:!w-14 [&>a>div]:!h-10 [&>a>div]:!w-10 [&>a>div]:md:!h-14 [&>a>div]:md:!w-14 [&>div]:!h-10 [&>div]:!w-10 [&>div]:md:!h-14 [&>div]:md:!w-14 [&_img]:!h-full [&_img]:!w-auto [&_img]:!max-w-full"
+            />
+          </Link>
 
-          {/* Desktop Navigation - Shifted to the right, hidden on mobile, visible from md */}
-          <nav className="ml-auto hidden items-center gap-6 md:flex lg:gap-8">
+          {/* Desktop Navigation */}
+          <nav className="hidden items-center gap-6 md:flex">
             {navigation.map((item) => (
-              <NavLink
+              <Link
                 key={item.name}
                 href={item.href}
-                className="group relative text-sm font-medium lg:text-body"
+                className="text-sm font-medium text-[#004225]/80 transition-colors hover:text-[#004225]"
               >
                 {item.name}
-                <span className="absolute -bottom-1 left-0 h-px w-0 bg-accent transition-all group-hover:w-full" />
-              </NavLink>
+              </Link>
             ))}
+            <a
+              href="https://tally.so/r/44Jrpb"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-block"
+            >
+              <Button
+                variant="primary"
+                size="md"
+                className="rounded-full bg-[#004225] !px-6 !py-2.5 !text-sm text-[#F5F1E5] shadow-none hover:bg-[#0B6E4F] hover:text-[#F5F1E5]"
+              >
+                Book a Call
+              </Button>
+            </a>
           </nav>
 
-          {/* Mobile Menu Button - Visible only on mobile */}
-          <button
-            onClick={toggleMobileMenu}
-            className="z-50 flex items-center justify-center p-1.5 text-primary transition-colors hover:text-accent md:hidden"
-            aria-label="Toggle menu"
-            aria-expanded={isMobileMenuOpen}
-          >
-            {isMobileMenuOpen ? (
-              <X className="h-5 w-5" />
-            ) : (
-              <Menu className="h-5 w-5" />
-            )}
-          </button>
+          {/* Mobile Menu - Popover Style */}
+          <div className="relative md:hidden">
+            {/* Animated Toggle Button */}
+            <button
+              onClick={toggleMobileMenu}
+              className="relative z-50 flex h-11 w-11 items-center justify-center rounded-full border border-[#004225]/5 bg-[#004225]/5 transition-colors hover:bg-[#004225]/10"
+              aria-label="Toggle menu"
+              aria-expanded={isMobileMenuOpen}
+            >
+              <motion.svg
+                width="20"
+                height="20"
+                viewBox="0 0 24 24"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                {/* Top Line -> Rotates 45deg */}
+                <motion.path
+                  stroke="#004225"
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                  variants={{
+                    closed: { d: "M 4 8 L 20 8" },
+                    open: { d: "M 6 18 L 18 6" },
+                  }}
+                  initial="closed"
+                  animate={isMobileMenuOpen ? "open" : "closed"}
+                  transition={{
+                    type: "spring",
+                    stiffness: 300,
+                    damping: 25,
+                  }}
+                />
+                {/* Bottom Line -> Rotates -45deg */}
+                <motion.path
+                  stroke="#004225"
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                  variants={{
+                    closed: { d: "M 4 16 L 20 16" },
+                    open: { d: "M 6 6 L 18 18" },
+                  }}
+                  initial="closed"
+                  animate={isMobileMenuOpen ? "open" : "closed"}
+                  transition={{
+                    type: "spring",
+                    stiffness: 300,
+                    damping: 25,
+                  }}
+                />
+              </motion.svg>
+            </button>
+
+            {/* The Popover Menu */}
+            <AnimatePresence>
+              {isMobileMenuOpen && (
+                <>
+                  {/* Invisible backdrop to close on click-outside */}
+                  <div
+                    className="fixed inset-0 z-40"
+                    onClick={closeMobileMenu}
+                  />
+
+                  {/* The Menu Card */}
+                  <motion.div
+                    initial={{ opacity: 0, scale: 0.95, y: -10 }}
+                    animate={{ opacity: 1, scale: 1, y: 0 }}
+                    exit={{ opacity: 0, scale: 0.95, y: -10 }}
+                    transition={{
+                      type: "spring",
+                      stiffness: 300,
+                      damping: 25,
+                    }}
+                    className="absolute right-0 top-full z-50 mt-2 flex w-[220px] flex-col gap-3 rounded-2xl border border-[#004225]/10 bg-[#F5F1E5] p-4 shadow-xl"
+                  >
+                    {/* Navigation Links */}
+                    <nav className="flex flex-col gap-2">
+                      {navigation.map((item) => (
+                        <Link
+                          key={item.name}
+                          href={item.href}
+                          onClick={closeMobileMenu}
+                          className="text-left text-sm font-medium text-[#004225] transition-colors hover:text-[#0B6E4F]"
+                        >
+                          {item.name}
+                        </Link>
+                      ))}
+                    </nav>
+
+                    <div className="h-px w-full bg-[#004225]/10" />
+
+                    {/* CTA Button */}
+                    <a
+                      href="https://tally.so/r/44Jrpb"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-block w-full"
+                      onClick={closeMobileMenu}
+                    >
+                      <Button
+                        variant="primary"
+                        size="md"
+                        className="w-full !h-9 whitespace-nowrap rounded-full bg-[#004225] text-xs text-[#F5F1E5] shadow-lg hover:bg-[#0B6E4F] hover:text-[#F5F1E5]"
+                      >
+                        Book a Call
+                      </Button>
+                    </a>
+                  </motion.div>
+                </>
+              )}
+            </AnimatePresence>
+          </div>
         </div>
       </Container>
-
-      {/* Mobile Menu Overlay - Full screen like reference */}
-      {isMobileMenuOpen && (
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          className="fixed inset-0 z-40 flex flex-col items-center justify-center gap-8 bg-secondary md:hidden"
-        >
-          {navigation.map((item) => (
-            <NavLink
-              key={item.name}
-              href={item.href}
-              onClick={closeMobileMenu}
-              className="text-2xl font-bold text-primary"
-            >
-              {item.name}
-            </NavLink>
-          ))}
-        </motion.div>
-      )}
     </header>
   )
 }

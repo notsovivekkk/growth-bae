@@ -1,6 +1,6 @@
 "use client"
 
-import { motion, type Variants } from "framer-motion"
+import { motion } from "framer-motion"
 import { ArrowRight } from "lucide-react"
 import { Container } from "@/components/ui/container"
 import { Section } from "@/components/ui/section"
@@ -9,192 +9,94 @@ import { cn } from "@/lib/utils"
 
 /**
  * Hero Section
- * Fully responsive hero with mobile-first approach
- * Typography, spacing, and buttons scale across all viewports
- * Includes glass-morphism tag above hero
- * Animation variants with "Quiet Confidence" - slow, eased transitions
+ * Badge: "Founder Build Studio"
+ * Headline with gradient text and italic serif font
+ * CTA button: "Start Your Growth"
+ * Decorative background elements
  */
 
-// Animation variants for "Quiet Confidence" (Slow, eased transitions)
-const fadeInUp: Variants = {
-  hidden: { opacity: 0, y: 40 },
-  visible: (custom: number) => ({
-    opacity: 1,
-    y: 0,
-    transition: {
-      delay: custom * 0.2,
-      duration: 0.8,
-      ease: [0.22, 1, 0.36, 1], // Custom ease similar to quintOut
-    },
-  }),
-}
-
-const slideIn: Variants = {
-  hidden: { opacity: 0, x: -20 },
-  visible: {
-    opacity: 1,
-    x: 0,
-    transition: {
-      delay: 0.8,
-      duration: 0.8,
-      ease: "easeOut",
-    },
-  },
-}
-
-const float: Variants = {
-  initial: { y: 0 },
-  animate: {
-    y: [0, -4, 0],
-    transition: {
-      duration: 4,
-      repeat: Infinity,
-      ease: "easeInOut",
-    },
-  },
-}
-
-export interface HeroSectionProps {
-  tagText?: string
-  headline?: string | string[]
-  subtext?: string
-  primaryCtaText?: string
-  primaryCtaHref?: string
-}
-
-export function HeroSection({
-  tagText = "Founder Build Studio",
-  headline = ["Build MVPs and systems", "that actually scale."],
-  subtext = "A perfect blend of design, product thinking and clean engineering to turn your ideas into winning products.",
-  primaryCtaText = "Start your project",
-  primaryCtaHref = "#",
-}: HeroSectionProps) {
-  // Handle both string and array headlines
-  const headlineLines = Array.isArray(headline) ? headline : [headline]
-
+export function HeroSection() {
   return (
     <Section
       padding="none"
       className={cn(
-        "relative flex flex-col justify-center overflow-hidden bg-secondary",
-        // Remove forced min-height, let content drive height for better flow
-        "min-h-fit",
-        // Responsive top padding to account for compact header height
-        // Aggressively reduced bottom padding to bring marquee closer
-        "pb-6 pt-16 md:pb-8 md:pt-20"
+        "relative flex min-h-[90vh] flex-col justify-center overflow-hidden bg-[#F3F1E6] md:min-h-screen",
+        "pb-6 pt-40 md:pb-12 md:pt-48"
       )}
+      id="home"
     >
       <Container className="relative z-10">
-        {/* Content wrapper with responsive max-width */}
-        <div className="w-full max-w-full sm:max-w-2xl md:max-w-3xl lg:max-w-4xl xl:max-w-5xl">
-          {/* Glass-morphism Tag/Badge - Above hero */}
+        <div className="max-w-4xl">
+          {/* Badge */}
           <motion.div
-            initial="hidden"
-            animate="visible"
-            variants={fadeInUp}
-            custom={0}
-            className="mb-2 inline-block sm:mb-3 md:mb-4"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
+            className="mb-4"
           >
-            <motion.div
-              variants={float}
-              initial="initial"
-              animate="animate"
-              className={cn(
-                "inline-flex items-center justify-center rounded-full",
-                "border border-white/60 bg-white/40 backdrop-blur-xl",
-                // Responsive padding
-                "px-3 py-1.5 sm:px-4 sm:py-2",
-                "shadow-sm",
-                // Responsive text
-                "text-xs font-medium tracking-wide text-primary sm:text-sm"
-              )}
-            >
-              {tagText}
-            </motion.div>
+            <div className="inline-flex items-center gap-2 rounded-full border border-[#064e3b]/10 bg-white/10 px-3 py-1 text-xs font-medium text-[#064e3b] backdrop-blur-md">
+              <span className="relative flex h-2 w-2">
+                <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-green-400 opacity-75"></span>
+                <span className="relative inline-flex h-2 w-2 rounded-full bg-green-500"></span>
+              </span>
+              Founder Build Studio
+            </div>
           </motion.div>
 
-          {/* H1 Headline - Multi-line with different colors */}
+          {/* Headline */}
           <motion.h1
-            initial="hidden"
-            animate="visible"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.1 }}
             className={cn(
-              "font-extrabold leading-[1.1] tracking-tight text-primary",
-              // Use design system H1 with responsive scaling
-              "text-2xl sm:text-3xl md:text-4xl lg:text-5xl",
-              // Responsive margins - Tighten H1 to Subtitle (Compact Mode)
-              "mb-2.5 sm:mb-3"
+              "mb-4 text-4xl font-semibold leading-none tracking-tighter text-[#064e3b] md:text-5xl lg:text-6xl"
             )}
           >
-            {headlineLines.map((line, index) => (
-              <motion.span
-                key={index}
-                custom={index + 1}
-                variants={fadeInUp}
-                className={cn(
-                  "block",
-                  // Second line gets accent color
-                  index === 1 && "text-accent/90"
-                )}
-              >
-                {line}
-              </motion.span>
-            ))}
+            Build{" "}
+            <span className="bg-gradient-to-r from-[#064e3b] to-[#0B6E4F] bg-clip-text text-transparent">
+              MVPs
+            </span>{" "}
+            and AI systems that actually{" "}
+            <span className="font-serif italic">scale.</span>
           </motion.h1>
 
-          {/* Subheading - Responsive typography and spacing */}
+          {/* Subtext */}
           <motion.p
-            initial="hidden"
-            animate="visible"
-            variants={fadeInUp}
-            custom={4}
-            className={cn(
-              "font-medium text-primary/80",
-              // Responsive typography
-              "text-lg md:text-xl",
-              // Responsive max-width for readability
-              "max-w-2xl",
-              // Leading for readability with tight margins
-              "leading-normal"
-            )}
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.2 }}
+            className="mb-8 max-w-xl text-base leading-relaxed text-[#064e3b]/70"
           >
-            {subtext}
+            GrowthBae is a perfect blend of design, product thinking and clean
+            engineering to turn your ideas into winning products.
           </motion.p>
 
           {/* CTA Button */}
           <motion.div
-            variants={slideIn}
-            initial="hidden"
-            animate="visible"
-            className={cn(
-              "flex flex-col items-start gap-3 sm:flex-row sm:items-center sm:gap-4",
-              // Vertical rhythm from Subtitle - Reduced for accessibility
-              "mt-5 sm:mt-6"
-            )}
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.3 }}
+            className="flex flex-col gap-4 sm:flex-row"
           >
-            {/* Primary Button - Standard Web App Sizing */}
-            <Link
-              href={primaryCtaHref}
+            <a
+              href="https://tally.so/r/44Jrpb"
+              target="_blank"
+              rel="noopener noreferrer"
               className={cn(
-                "group inline-flex items-center justify-center gap-2",
-                // Base sizing (Standard Web App) and typography
-                "px-5 py-2.5 text-sm font-medium",
-                // Colors & Border: Default state (Green bg, White text, No border)
-                "border border-transparent bg-[#004225] text-white",
-                // Hover state (Transparent bg, Green text, Green border)
-                "hover:border-[#004225] hover:bg-transparent hover:text-[#004225]",
-                // Layout & Transitions
-                "rounded-full transition-all duration-300",
-                "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#004225] focus-visible:ring-offset-2",
-                // Full width on mobile, auto on larger screens
-                "w-full sm:w-auto"
+                "inline-flex items-center justify-center gap-2",
+                "rounded-full px-5 py-2.5 text-sm font-medium transition-all duration-300",
+                "bg-[#004225] text-[#F5F1E5] shadow-xl shadow-[#0B6E4F]/20 hover:scale-105 hover:bg-[#0B6E4F] hover:text-[#F5F1E5] hover:shadow-2xl"
               )}
             >
-              <span className="whitespace-nowrap">{primaryCtaText}</span>
-              <ArrowRight className="h-4 w-4 flex-shrink-0 transition-transform duration-300 group-hover:translate-x-1" />
-            </Link>
+              Start Your Growth <ArrowRight className="ml-2 h-4 w-4" />
+            </a>
           </motion.div>
         </div>
       </Container>
+
+      {/* Decorative Background Elements */}
+      <div className="pointer-events-none absolute right-0 top-0 h-full w-1/3 bg-gradient-to-l from-[#0B6E4F]/5 to-transparent" />
+      <div className="pointer-events-none absolute bottom-0 left-0 h-96 w-96 rounded-full bg-[#0B6E4F]/5 blur-3xl" />
     </Section>
   )
 }
