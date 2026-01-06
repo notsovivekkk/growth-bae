@@ -57,51 +57,81 @@ const playfairDisplay = Playfair_Display({
 })
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://growthbae.com"),
   title: {
-    default: siteConfig.name,
-    template: `%s | ${siteConfig.name}`,
+    default: "GrowthBae | Build MVPs & Systems that Scale",
+    template: "%s | GrowthBae",
   },
-  description: siteConfig.description,
+  description:
+    "The founder-first build studio. We turn back-of-napkin sketches into revenue-generating products with velocity. Web Design, Mobile Apps, and AI Systems.",
   keywords: [
-    "Growth",
-    "Marketing",
-    "Strategy",
-    "Case Studies",
-    "Premium",
-    "Next.js",
-    "TypeScript",
+    "GrowthBae",
+    "MVP Builder",
+    "Product Studio",
+    "Web Development",
+    "Mobile App Development",
+    "AI Automation",
+    "Startup Agency",
+    "Founder Build Studio",
   ],
-  authors: [
-    {
-      name: "GrowthBae",
-      url: siteConfig.url,
-    },
-  ],
+  authors: [{ name: "GrowthBae Team" }],
   creator: "GrowthBae",
   openGraph: {
     type: "website",
     locale: "en_US",
-    url: siteConfig.url,
-    title: siteConfig.name,
-    description: siteConfig.description,
-    siteName: siteConfig.name,
+    url: "https://growthbae.com",
+    title: "GrowthBae | Build MVPs & Systems that Scale",
+    description:
+      "Stop sitting on your idea. We help founders build, ship, and scale faster. Velocity, not just speed.",
+    siteName: "GrowthBae",
     images: [
       {
-        url: siteConfig.ogImage,
+        url: "/og-image.png",
         width: 1200,
         height: 630,
-        alt: siteConfig.name,
+        alt: "GrowthBae - Founder Build Studio",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: siteConfig.name,
-    description: siteConfig.description,
+    title: "GrowthBae | Build MVPs & Systems that Scale",
+    description:
+      "The founder-first build studio. We turn ideas into winning products with velocity.",
+    images: ["/og-image.png"],
     creator: "@growthbae",
   },
   icons: {
-    icon: "/favicon.ico",
+    icon: [
+      {
+        url: "/images/favicon_io/favicon-16x16.png",
+        sizes: "16x16",
+        type: "image/png",
+      },
+      {
+        url: "/images/favicon_io/favicon-32x32.png",
+        sizes: "32x32",
+        type: "image/png",
+      },
+      { url: "/images/favicon_io/favicon.ico", sizes: "any" },
+    ],
+    apple: [
+      {
+        url: "/images/favicon_io/apple-touch-icon.png",
+        sizes: "180x180",
+        type: "image/png",
+      },
+    ],
+    other: [
+      {
+        rel: "android-chrome-192x192",
+        url: "/images/favicon_io/android-chrome-192x192.png",
+      },
+      {
+        rel: "android-chrome-512x512",
+        url: "/images/favicon_io/android-chrome-512x512.png",
+      },
+    ],
   },
   manifest: "/site.webmanifest",
 }
@@ -149,7 +179,7 @@ export default function RootLayout({
         {/* Skip to main content link for accessibility */}
         <a
           href="#main-content"
-          className="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-50 focus:rounded-md focus:bg-[#004225] focus:px-4 focus:py-2 focus:text-[#F5F1E5] focus:outline-none focus:ring-2 focus:ring-[#0B6E4F] focus:ring-offset-2"
+          className="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-50 focus:rounded-md focus:bg-[#004225] focus:px-4 focus:py-2 focus:text-[#F5F1E5] focus:outline-none focus:ring-2 focus:ring-[#0B6E4F] focus:ring-offset-2"
         >
           Skip to main content
         </a>
