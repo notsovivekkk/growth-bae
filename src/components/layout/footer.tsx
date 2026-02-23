@@ -104,13 +104,18 @@ export function Footer() {
 
           {/* 2. Navigation Links (Center) */}
           <div className="order-1 flex flex-row flex-nowrap justify-center gap-3 md:order-2 md:gap-8">
-            {["Home", "Process", "Services", "Works"].map((item) => (
+            {[
+              { name: "Case Studies", href: "/case-studies" },
+              { name: "Process", href: "#process" },
+              { name: "Services", href: "#services" },
+              { name: "Works", href: "#works" },
+            ].map((item) => (
               <a
-                key={item}
-                href={`#${item.toLowerCase()}`}
+                key={item.name}
+                href={item.href}
                 className="text-xs font-medium text-[#004225]/80 transition-colors hover:text-[#0B6E4F] md:text-sm"
               >
-                {item}
+                {item.name}
               </a>
             ))}
           </div>
