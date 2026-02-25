@@ -4,6 +4,7 @@ import { useState, useEffect } from "react"
 import { motion, AnimatePresence } from "framer-motion"
 import { Header } from "@/components/layout/header"
 import { Container } from "@/components/ui/container"
+import Link from "next/link"
 import {
   FileText,
   Receipt,
@@ -32,7 +33,7 @@ const FIELDS = [
 const METRICS = [
   { label: "Fields", value: "42 / 48" },
   { label: "Fill Rate", value: "88%" },
-  { label: "Speed", value: "12.3s" },
+  { label: "Speed", value: "<30s" },
   { label: "Faster", value: "~150×" },
 ]
 
@@ -268,7 +269,7 @@ const cardVariants = {
   visible: {
     y: 0,
     opacity: 1,
-    transition: { duration: 0.5, ease: "easeOut" },
+    transition: { duration: 0.5, ease: "easeOut" as const },
   },
   hover: {
     y: -6,
@@ -282,7 +283,7 @@ const cardVariantsDelayed = {
   visible: {
     y: 0,
     opacity: 1,
-    transition: { duration: 0.5, ease: "easeOut", delay: 0.1 },
+    transition: { duration: 0.5, ease: "easeOut" as const, delay: 0.1 },
   },
   hover: {
     y: -6,
@@ -353,26 +354,28 @@ export default function CaseStudiesPage() {
           <div className="grid grid-cols-1 gap-5 lg:grid-cols-2">
 
             {/* Card 1 — Insurance Claims Automation */}
-            <motion.div
-              variants={cardVariants}
-              initial="hidden"
-              whileInView="visible"
-              whileHover="hover"
-              viewport={{ once: true, margin: "-10%" }}
-              className="cursor-pointer overflow-hidden rounded-3xl border border-[#004225]/5 bg-white shadow-[0_8px_32px_rgba(0,0,0,0.07)] hover:shadow-[0_24px_60px_rgba(0,0,0,0.12)] transition-shadow duration-300"
-            >
-              <div className="h-[220px] sm:h-[250px] md:h-[280px]">
-                <InsuranceClaimsPreview />
-              </div>
-              <div className="border-t border-[#004225]/5 px-5 py-4 text-center sm:px-6">
-                <span className="text-[10px] font-bold uppercase tracking-wider text-[#0B6E4F]">
-                  AI Automation · Insurance Tech
-                </span>
-                <h3 className="mt-1 text-base font-bold text-[#004225] md:text-lg">
-                  Insurance Claims Automation
-                </h3>
-              </div>
-            </motion.div>
+            <Link href="/case-studies/insurance-claims" className="block h-full">
+              <motion.div
+                variants={cardVariants}
+                initial="hidden"
+                whileInView="visible"
+                whileHover="hover"
+                viewport={{ once: true, margin: "-10%" }}
+                className="h-full overflow-hidden rounded-3xl border border-[#004225]/5 bg-white shadow-[0_8px_32px_rgba(0,0,0,0.07)] hover:shadow-[0_24px_60px_rgba(0,0,0,0.12)] transition-shadow duration-300"
+              >
+                <div className="h-[220px] sm:h-[250px] md:h-[280px]">
+                  <InsuranceClaimsPreview />
+                </div>
+                <div className="border-t border-[#004225]/5 px-5 py-4 text-center sm:px-6">
+                  <span className="text-[10px] font-bold uppercase tracking-wider text-[#0B6E4F]">
+                    AI Automation · Insurance Tech
+                  </span>
+                  <h3 className="mt-1 text-base font-bold text-[#004225] md:text-lg">
+                    Insurance Claims Automation
+                  </h3>
+                </div>
+              </motion.div>
+            </Link>
 
             {/* Card 2 — Coming Soon */}
             <motion.div
