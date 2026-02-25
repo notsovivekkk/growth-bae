@@ -1,6 +1,7 @@
 "use client"
 
 import { useState, useEffect } from "react"
+import { usePathname } from "next/navigation"
 import { motion, AnimatePresence } from "framer-motion"
 import { Container } from "@/components/ui/container"
 import { Logo } from "@/components/ui/logo"
@@ -18,7 +19,7 @@ import { siteConfig } from "@/config/site"
  */
 
 const navigation = [
-  { name: "Home", href: "#home" },
+  { name: "Case Studies", href: "/case-studies" },
   { name: "Process", href: "#process" },
   { name: "Services", href: "#services" },
   { name: "Works", href: "#works" },
@@ -27,6 +28,8 @@ const navigation = [
 export function Header() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
   const [isScrolled, setIsScrolled] = useState(false)
+  const pathname = usePathname()
+  const logoHref = pathname === "/" ? "#home" : "/"
 
   // Handle scroll for navbar styling (glassmorphism effect)
   useEffect(() => {
@@ -60,7 +63,7 @@ export function Header() {
         <div className="flex items-center justify-between">
           {/* Logo */}
           <Logo
-            href="#home"
+            href={logoHref}
             size="sm"
             className="relative z-50 !h-10 !w-10 md:!h-14 md:!w-14 [&>a>div]:!h-10 [&>a>div]:!w-10 [&>a>div]:md:!h-14 [&>a>div]:md:!w-14 [&>div]:!h-10 [&>div]:!w-10 [&>div]:md:!h-14 [&>div]:md:!w-14 [&_img]:!h-full [&_img]:!w-auto [&_img]:!max-w-full"
           />
