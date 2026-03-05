@@ -51,7 +51,7 @@ export function EcomFlowCard() {
       </div>
 
       {/* Terminal body */}
-      <div className="space-y-0 p-6 font-mono text-[12px] leading-[2]">
+      <div className="space-y-0 overflow-x-auto p-4 font-mono text-[10px] leading-[2] lg:p-6 lg:text-[12px]">
         <div><Label>{`// inbound message`}</Label></div>
         <Divider />
         <div><Key>{`customer  `}</Key><Value>&quot;Where is my order?&quot;</Value></div>
