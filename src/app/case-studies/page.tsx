@@ -210,6 +210,257 @@ function InsuranceClaimsPreview() {
   )
 }
 
+// ─── EcomFlow Animated Preview ───────────────────────────────────────────────
+
+const LINE_EASE: [number, number, number, number] = [0.4, 0, 0.2, 1]
+
+function mkLineAnim(step: number, minStep: number) {
+  return {
+    opacity: step >= minStep ? 1 : 0,
+    y: step >= minStep ? 0 : 5,
+    transition: { duration: 0.4, ease: LINE_EASE },
+  }
+}
+
+// ── Scene A: Recovery Log ────────────────────────────────────────────────────
+
+function RecoveryLogScene({ onDone }: { onDone: () => void }) {
+  const [step, setStep] = useState(0)
+  const [revenue, setRevenue] = useState(0)
+  const DELAYS = [700, 700, 600, 2200]
+
+  useEffect(() => {
+    const t = setTimeout(() => {
+      if (step < DELAYS.length - 1) {
+        setStep((s) => s + 1)
+      } else {
+        onDone()
+      }
+    }, DELAYS[step] ?? 0)
+    return () => clearTimeout(t)
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [step])
+
+  useEffect(() => {
+    if (step !== 3) { setRevenue(0); return }
+    let val = 0
+    const iv = setInterval(() => {
+      val = Math.min(val + 7, 84)
+      setRevenue(val)
+      if (val >= 84) clearInterval(iv)
+    }, 80)
+    return () => clearInterval(iv)
+  }, [step])
+
+  return (
+    <div className="flex w-full max-w-[220px] flex-col gap-3.5 px-2 sm:max-w-[260px]">
+      {/* Header */}
+      <div className="flex items-center justify-between">
+        <p className="text-[8px] font-bold uppercase tracking-widest text-[#004225]/30 sm:text-[9px]">
+          Recovery Log
+        </p>
+        <span className="rounded-full border border-[#004225]/10 bg-[#004225]/5 px-1.5 py-0.5 text-[7px] font-medium text-[#004225]/25">
+          3 events
+        </span>
+      </div>
+
+      {/* Log lines */}
+      <div className="flex flex-col gap-2.5 sm:gap-3">
+
+        {/* Line 1 — Cart abandoned */}
+        <motion.div animate={mkLineAnim(step, 0)} className="flex items-center gap-2">
+          <span className="w-7 shrink-0 text-[7.5px] tabular-nums text-[#004225]/20">14:32</span>
+          <span className="h-1.5 w-1.5 shrink-0 rounded-full bg-red-400" />
+          <p className="flex-1 text-[9.5px] font-medium leading-snug text-[#004225]/65 sm:text-[10.5px]">
+            Cart abandoned · Air Max 97
+          </p>
+          <span className="shrink-0 rounded-full border border-red-200 bg-red-50 px-1.5 py-0.5 text-[7px] font-semibold text-red-400">
+            Abandoned
+          </span>
+        </motion.div>
+
+        {/* Line 2 — AI message */}
+        <motion.div animate={mkLineAnim(step, 1)} className="flex items-center gap-2">
+          <span className="w-7 shrink-0 text-[7.5px] tabular-nums text-[#004225]/20">14:33</span>
+          <span className="h-1.5 w-1.5 shrink-0 rounded-full bg-[#0B6E4F]" />
+          <p className="flex-1 text-[9.5px] font-medium leading-snug text-[#004225]/65 sm:text-[10.5px]">
+            AI message sent · 28s later
+          </p>
+        </motion.div>
+
+        {/* Line 3 — Order placed */}
+        <motion.div animate={mkLineAnim(step, 2)} className="flex items-center gap-2">
+          <span className="w-7 shrink-0 text-[7.5px] tabular-nums text-[#004225]/20">14:38</span>
+          <span className="h-1.5 w-1.5 shrink-0 rounded-full bg-[#0B6E4F]" />
+          <p className="flex-1 text-[9.5px] font-medium leading-snug text-[#004225]/65 sm:text-[10.5px]">
+            Order placed · 6m later
+          </p>
+          <span className="shrink-0 rounded-full border border-emerald-200 bg-emerald-50 px-1.5 py-0.5 text-[7px] font-semibold text-emerald-500">
+            Recovered
+          </span>
+        </motion.div>
+
+      </div>
+
+      {/* Stats footer */}
+      <motion.div
+        animate={mkLineAnim(step, 3)}
+        className="flex items-center justify-between border-t border-[#004225]/8 pt-2.5 sm:pt-3"
+      >
+        <p className="text-[8px] text-[#004225]/35">67% rate · 28s avg</p>
+        <p className="text-right text-sm font-bold tabular-nums text-[#0B6E4F] sm:text-base">
+          £{revenue} recovered
+        </p>
+      </motion.div>
+    </div>
+  )
+}
+
+// ── Scene B: Support Query ───────────────────────────────────────────────────
+
+function SupportQueryScene({ onDone }: { onDone: () => void }) {
+  const [step, setStep] = useState(0)
+  const DELAYS = [800, 900, 2000]
+
+  useEffect(() => {
+    const t = setTimeout(() => {
+      if (step < DELAYS.length - 1) {
+        setStep((s) => s + 1)
+      } else {
+        onDone()
+      }
+    }, DELAYS[step] ?? 0)
+    return () => clearTimeout(t)
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [step])
+
+  return (
+    <div className="flex w-full max-w-[220px] flex-col gap-3.5 px-2 sm:max-w-[260px]">
+      {/* Header */}
+      <div className="flex items-center justify-between">
+        <p className="text-[8px] font-bold uppercase tracking-widest text-[#004225]/30 sm:text-[9px]">
+          Support Query
+        </p>
+        <div className="flex items-center gap-1">
+          <motion.span
+            animate={{ scale: [1, 1.4, 1] }}
+            transition={{ repeat: Infinity, duration: 2, ease: "easeInOut" }}
+            className="inline-block h-1.5 w-1.5 rounded-full bg-emerald-400"
+          />
+          <span className="text-[7px] font-medium text-emerald-500">Live</span>
+        </div>
+      </div>
+
+      {/* Log lines */}
+      <div className="flex flex-col gap-2.5 sm:gap-3">
+
+        {/* Customer message */}
+        <motion.div animate={mkLineAnim(step, 0)} className="flex items-center gap-2">
+          <span className="w-7 shrink-0 text-[7.5px] tabular-nums text-[#004225]/20">14:41</span>
+          <span className="h-1.5 w-1.5 shrink-0 rounded-full bg-[#004225]/25" />
+          <p className="flex-1 text-[9.5px] font-medium leading-snug text-[#004225]/65 sm:text-[10.5px]">
+            <span className="mr-1 text-[#004225]/30">Ivanka S.</span>
+            &ldquo;Where&apos;s my order?&rdquo;
+          </p>
+        </motion.div>
+
+        {/* Typing — only at step 1 */}
+        <motion.div
+          animate={{
+            opacity: step === 1 ? 1 : 0,
+            y: step === 1 ? 0 : 4,
+            transition: { duration: 0.3, ease: LINE_EASE },
+          }}
+          className="flex items-center gap-2"
+        >
+          <span className="w-7 shrink-0 text-[7.5px] tabular-nums text-[#004225]/20">14:41</span>
+          <span className="h-1.5 w-1.5 shrink-0 rounded-full bg-[#0B6E4F]/40" />
+          <p className="text-[9.5px] font-medium italic leading-snug text-[#004225]/35 sm:text-[10.5px]">
+            AI · typing...
+          </p>
+        </motion.div>
+
+        {/* AI reply */}
+        <motion.div animate={mkLineAnim(step, 2)} className="flex items-start gap-2">
+          <span className="mt-1 w-7 shrink-0 text-[7.5px] tabular-nums text-[#004225]/20">14:42</span>
+          <div className="flex flex-col gap-1.5">
+            <div className="flex items-center gap-2">
+              <span className="h-1.5 w-1.5 shrink-0 rounded-full bg-[#0B6E4F]" />
+              <p className="text-[9.5px] font-medium leading-snug text-[#004225]/65 sm:text-[10.5px]">
+                Order #4821 · BlueDart
+              </p>
+            </div>
+            <motion.div
+              animate={{
+                opacity: step >= 2 ? 1 : 0,
+                transition: { duration: 0.35, ease: LINE_EASE, delay: 0.25 },
+              }}
+              className="ml-3.5 flex items-center gap-1.5"
+            >
+              <span className="h-1.5 w-1.5 shrink-0 rounded-full bg-[#0B6E4F]" />
+              <p className="text-[8.5px] font-semibold text-[#0B6E4F] sm:text-[9.5px]">In Transit</p>
+            </motion.div>
+            <motion.p
+              animate={{
+                opacity: step >= 2 ? 1 : 0,
+                transition: { duration: 0.35, ease: LINE_EASE, delay: 0.45 },
+              }}
+              className="ml-3.5 text-[8px] text-[#004225]/40 sm:text-[8.5px]"
+            >
+              Est. delivery: Tomorrow
+            </motion.p>
+          </div>
+        </motion.div>
+
+      </div>
+
+      {/* Stats footer */}
+      <motion.div
+        animate={mkLineAnim(step, 2)}
+        transition={{ delay: 0.6 }}
+        className="flex justify-end border-t border-[#004225]/8 pt-2.5 sm:pt-3"
+      >
+        <p className="text-[8px] text-[#004225]/35">22s response · ✓ Resolved</p>
+      </motion.div>
+    </div>
+  )
+}
+
+// ── Orchestrator ─────────────────────────────────────────────────────────────
+
+function EcomFlowPreview() {
+  const [scene, setScene] = useState<0 | 1>(0)
+  const [transitioning, setTransitioning] = useState(false)
+
+  const switchScene = () => {
+    setTransitioning(true)
+    setTimeout(() => {
+      setScene((s) => (s === 0 ? 1 : 0))
+      setTransitioning(false)
+    }, 420)
+  }
+
+  return (
+    <div
+      className="relative flex h-full w-full items-center justify-center overflow-hidden bg-[#F5F1E5]"
+      style={{
+        backgroundImage:
+          "radial-gradient(circle, rgba(0,66,37,0.06) 1px, transparent 1px)",
+        backgroundSize: "20px 20px",
+      }}
+    >
+      <motion.div
+        animate={{ opacity: transitioning ? 0 : 1 }}
+        transition={{ duration: 0.4 }}
+      >
+        {scene === 0
+          ? <RecoveryLogScene key={scene} onDone={switchScene} />
+          : <SupportQueryScene key={scene} onDone={switchScene} />}
+      </motion.div>
+    </div>
+  )
+}
+
 // ─── Coming Soon Preview — Claude-style ──────────────────────────────────────
 
 const CYCLE_WORDS = ["Deliberating", "Architecting", "Scoping", "Shipping"]
@@ -284,6 +535,20 @@ const cardVariantsDelayed = {
     y: 0,
     opacity: 1,
     transition: { duration: 0.5, ease: "easeOut" as const, delay: 0.1 },
+  },
+  hover: {
+    y: -6,
+    scale: 1.015,
+    transition: { type: "spring" as const, stiffness: 320, damping: 22 },
+  },
+}
+
+const cardVariantsDelayed2 = {
+  hidden: { y: 48, opacity: 0 },
+  visible: {
+    y: 0,
+    opacity: 1,
+    transition: { duration: 0.5, ease: "easeOut" as const, delay: 0.2 },
   },
   hover: {
     y: -6,
@@ -377,27 +642,55 @@ export default function CaseStudiesPage() {
               </motion.div>
             </Link>
 
-            {/* Card 2 — Coming Soon */}
-            <motion.div
-              variants={cardVariantsDelayed}
-              initial="hidden"
-              whileInView="visible"
-              whileHover="hover"
-              viewport={{ once: true, margin: "-10%" }}
-              className="cursor-pointer overflow-hidden rounded-3xl border border-[#004225]/5 bg-white shadow-[0_8px_32px_rgba(0,0,0,0.07)] hover:shadow-[0_24px_60px_rgba(0,0,0,0.12)] transition-shadow duration-300"
-            >
-              <div className="h-[220px] sm:h-[250px] md:h-[280px]">
-                <ComingSoonPreview />
+            {/* Card 2 — EcomFlow */}
+            <Link href="/case-studies/ecom-flow" className="block h-full">
+              <motion.div
+                variants={cardVariantsDelayed}
+                initial="hidden"
+                whileInView="visible"
+                whileHover="hover"
+                viewport={{ once: true, margin: "-10%" }}
+                className="h-full overflow-hidden rounded-3xl border border-[#004225]/5 bg-white shadow-[0_8px_32px_rgba(0,0,0,0.07)] hover:shadow-[0_24px_60px_rgba(0,0,0,0.12)] transition-shadow duration-300"
+              >
+                <div className="h-[220px] sm:h-[250px] md:h-[280px]">
+                  <EcomFlowPreview />
+                </div>
+                <div className="border-t border-[#004225]/5 px-5 py-4 text-center sm:px-6">
+                  <span className="text-[10px] font-bold uppercase tracking-wider text-[#0B6E4F]">
+                    AI · E-Commerce
+                  </span>
+                  <h3 className="mt-1 text-base font-bold text-[#004225] md:text-lg">
+                    EcomFlow
+                  </h3>
+                </div>
+              </motion.div>
+            </Link>
+
+            {/* Card 3 — Coming Soon, centered on row 2 */}
+            <div className="lg:col-span-2 flex justify-center">
+              <div className="w-full lg:max-w-[calc(50%-10px)]">
+                <motion.div
+                  variants={cardVariantsDelayed2}
+                  initial="hidden"
+                  whileInView="visible"
+                  whileHover="hover"
+                  viewport={{ once: true, margin: "-10%" }}
+                  className="cursor-pointer overflow-hidden rounded-3xl border border-[#004225]/5 bg-white shadow-[0_8px_32px_rgba(0,0,0,0.07)] hover:shadow-[0_24px_60px_rgba(0,0,0,0.12)] transition-shadow duration-300"
+                >
+                  <div className="h-[220px] sm:h-[250px] md:h-[280px]">
+                    <ComingSoonPreview />
+                  </div>
+                  <div className="border-t border-[#004225]/5 px-5 py-4 text-center sm:px-6">
+                    <span className="text-[10px] font-bold uppercase tracking-wider text-[#004225]/25">
+                      Coming Soon
+                    </span>
+                    <h3 className="mt-1 text-base font-bold text-[#004225]/25 md:text-lg">
+                      More Case Studies
+                    </h3>
+                  </div>
+                </motion.div>
               </div>
-              <div className="border-t border-[#004225]/5 px-5 py-4 text-center sm:px-6">
-                <span className="text-[10px] font-bold uppercase tracking-wider text-[#004225]/25">
-                  Coming Soon
-                </span>
-                <h3 className="mt-1 text-base font-bold text-[#004225]/25 md:text-lg">
-                  More Case Studies
-                </h3>
-              </div>
-            </motion.div>
+            </div>
 
           </div>
         </Container>
