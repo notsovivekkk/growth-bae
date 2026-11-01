@@ -1,0 +1,379 @@
+/**
+ * AEO page tokens + surfaces
+ * Scoped to `.aeo` so nothing here leaks into the rest of GrowthBae.
+ *
+ * Type, color and buttons follow the main GrowthBae site (bold/semibold
+ * headings, tight tracking, one Playfair italic word in the same color).
+ * What's new for this page is layout and motion, not the brand.
+ */
+
+/* ============================================
+   🎨 TOKENS
+   ============================================ */
+.aeo {
+  /* Brand (same as tailwind.config.ts) */
+  --aeo-ink: #004225; /* Deep Green: text + dark surfaces */
+  --aeo-green: #0b6e4f; /* Fresh Green: hover + small highlights */
+  --aeo-paper: #f5f1e5; /* Soft Cream: page background */
+  --aeo-card: #ffffff;
+
+  /* Derived tints, all from the brand greens/cream */
+  --aeo-ink-soft: rgba(0, 66, 37, 0.7); /* body copy on cream (AA) */
+  --aeo-paper-deep: #ede7d7; /* recessed cream for alt sections */
+  --aeo-night: #00301b; /* near-black green for dark sections */
+  --aeo-mint: #9ee6c4; /* highlight on dark: fresh green fails contrast there */
+  --aeo-cream-soft: rgba(245, 241, 229, 0.72); /* body copy on night */
+  --aeo-line: rgba(0, 66, 37, 0.1);
+  --aeo-line-strong: rgba(0, 66, 37, 0.18);
+  --aeo-line-dark: rgba(245, 241, 229, 0.12);
+  --aeo-warn: #a8501c; /* "why AI skips you" flags only */
+
+  /* Tints as tokens: Tailwind can't add /opacity to a var() color */
+  --aeo-ink-faint: rgba(0, 66, 37, 0.06);
+  --aeo-ink-dim: rgba(0, 66, 37, 0.35); /* not-yet-reached steps */
+  --aeo-green-tint: rgba(11, 110, 79, 0.1);
+  --aeo-paper-glass: rgba(245, 241, 229, 0.82);
+
+  /* Radius: matches the main site (inputs 8, cards 12, panels 16) */
+  --aeo-r-sm: 8px;
+  --aeo-r-md: 12px;
+  --aeo-r-lg: 16px;
+  --aeo-r-pill: 999px;
+
+  /* Shadows are tinted green, never grey, so they sit naturally on cream */
+  --aeo-shadow-sm: 0 1px 3px rgba(0, 48, 27, 0.08);
+  --aeo-shadow-md: 0 4px 12px rgba(0, 48, 27, 0.08);
+  --aeo-shadow-lg:
+    0 24px 48px -24px rgba(0, 48, 27, 0.25), 0 4px 12px rgba(0, 48, 27, 0.05);
+
+  /* Motion: one curve for everything that enters, one for exits */
+  --aeo-ease: cubic-bezier(0.22, 1, 0.36, 1);
+  --aeo-ease-exit: cubic-bezier(0.4, 0, 1, 1);
+  --aeo-dur-fast: 150ms;
+  --aeo-dur: 250ms;
+  --aeo-dur-slow: 350ms;
+
+  /* Layout */
+  --aeo-max: 1200px;
+  --aeo-gutter: clamp(16px, 4vw, 48px);
+  --aeo-section: clamp(64px, 8vw, 120px); /* = main site .section-padding */
+
+  /* Type: same families as the rest of the site */
+  --aeo-font-sans: var(--font-inter), var(--font-aktiv), system-ui, sans-serif;
+  --aeo-font-serif: var(--font-playfair), Georgia, serif;
+
+  background: var(--aeo-paper);
+  color: var(--aeo-ink);
+  font-family: var(--aeo-font-sans);
+  font-size: 16px;
+  line-height: 1.6;
+  overflow-x: clip;
+}
+
+/* Reset the global link + heading styles inside this page only.
+   :where() keeps specificity at zero so utility classes still win. */
+:where(.aeo) a,
+:where(.aeo) a:hover {
+  color: inherit;
+  text-decoration: none;
+}
+
+:where(.aeo) :is(h1, h2, h3, h4) {
+  color: inherit;
+  font-size: inherit;
+  font-weight: 700;
+  line-height: 1.15;
+  letter-spacing: -0.02em;
+  text-wrap: balance;
+}
+
+/* ============================================
+   📐 LAYOUT
+   ============================================ */
+.aeo .aeo-wrap {
+  width: 100%;
+  max-width: var(--aeo-max);
+  margin-inline: auto;
+  padding-inline: var(--aeo-gutter);
+}
+
+.aeo .aeo-section {
+  padding-block: var(--aeo-section);
+}
+
+.aeo .aeo-night {
+  background: var(--aeo-night);
+  color: var(--aeo-paper);
+}
+
+/* ============================================
+   🔶 TYPE (scale mirrors the main site)
+   ============================================ */
+
+/* Hero: semibold + tracking-tighter, like the home hero */
+.aeo .aeo-display {
+  font-size: clamp(36px, 5vw, 60px);
+  font-weight: 600;
+  line-height: 1.02;
+  letter-spacing: -0.05em;
+}
+
+/* Section headings: bold 36 → 48 */
+.aeo .aeo-h2 {
+  font-size: clamp(30px, 3.6vw, 44px);
+  line-height: 1.1;
+  letter-spacing: -0.03em;
+}
+
+.aeo .aeo-h3 {
+  font-size: clamp(17px, 1.5vw, 19px);
+  line-height: 1.3;
+  letter-spacing: -0.01em;
+}
+
+/* The GrowthBae signature: one word in Playfair italic, same color */
+.aeo .aeo-accent {
+  font-family: var(--aeo-font-serif);
+  font-style: italic;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+}
+
+.aeo .aeo-lead {
+  font-size: clamp(15px, 1.2vw, 17px);
+  line-height: 1.65;
+  color: var(--aeo-ink-soft);
+}
+.aeo .aeo-night .aeo-lead {
+  color: var(--aeo-cream-soft);
+}
+
+/* Small uppercase label for UI chrome */
+.aeo .aeo-label {
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  font-variant-numeric: tabular-nums;
+}
+
+/* ============================================
+   🧊 SURFACES
+   ============================================ */
+.aeo .aeo-card {
+  background: var(--aeo-card);
+  border: 1px solid var(--aeo-line);
+  border-radius: var(--aeo-r-lg);
+  transition:
+    border-color var(--aeo-dur) var(--aeo-ease),
+    box-shadow var(--aeo-dur-slow) var(--aeo-ease);
+}
+.aeo .aeo-card:hover {
+  border-color: var(--aeo-line-strong);
+  box-shadow: var(--aeo-shadow-md);
+}
+
+/* ============================================
+   🔘 BUTTONS (same as the main site CTA)
+   ============================================ */
+.aeo .aeo-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  height: 40px;
+  padding-inline: 20px;
+  border-radius: var(--aeo-r-pill);
+  font-size: 14px;
+  font-weight: 500;
+  white-space: nowrap;
+  transition:
+    transform var(--aeo-dur) var(--aeo-ease),
+    background-color var(--aeo-dur) var(--aeo-ease),
+    box-shadow var(--aeo-dur) var(--aeo-ease),
+    color var(--aeo-dur) var(--aeo-ease);
+}
+.aeo .aeo-btn:active {
+  transform: scale(0.98);
+}
+.aeo .aeo-btn--sm {
+  height: 36px;
+  padding-inline: 16px;
+  font-size: 13px;
+}
+.aeo .aeo-btn--lg {
+  height: 44px;
+  padding-inline: 22px;
+}
+.aeo .aeo-btn .aeo-arrow {
+  transition: transform var(--aeo-dur) var(--aeo-ease);
+}
+.aeo .aeo-btn:hover .aeo-arrow {
+  transform: translateX(3px);
+}
+
+.aeo .aeo-btn--primary,
+.aeo .aeo-btn--primary:hover {
+  color: var(--aeo-paper);
+  background: var(--aeo-ink);
+  box-shadow: 0 8px 20px -8px rgba(11, 110, 79, 0.45);
+}
+.aeo .aeo-btn--primary:hover {
+  background: var(--aeo-green);
+}
+
+/* On night, the primary flips to cream so it still reads as primary */
+.aeo .aeo-night .aeo-btn--primary,
+.aeo .aeo-night .aeo-btn--primary:hover {
+  color: var(--aeo-ink);
+  background: var(--aeo-paper);
+  box-shadow: none;
+}
+.aeo .aeo-night .aeo-btn--primary:hover {
+  background: var(--aeo-mint);
+}
+
+.aeo .aeo-btn--ghost,
+.aeo .aeo-btn--ghost:hover {
+  color: var(--aeo-ink);
+  background: transparent;
+  box-shadow: inset 0 0 0 1px var(--aeo-line-strong);
+}
+.aeo .aeo-btn--ghost:hover {
+  background: var(--aeo-card);
+}
+
+.aeo .aeo-btn--ghost-dark,
+.aeo .aeo-btn--ghost-dark:hover {
+  color: var(--aeo-paper);
+  background: transparent;
+  box-shadow: inset 0 0 0 1px var(--aeo-line-dark);
+}
+.aeo .aeo-btn--ghost-dark:hover {
+  background: rgba(245, 241, 229, 0.08);
+}
+
+/* ============================================
+   🟢 LIVE PING
+   ============================================ */
+.aeo .aeo-ping {
+  position: relative;
+  display: inline-block;
+  width: 6px;
+  height: 6px;
+  border-radius: var(--aeo-r-pill);
+  background: currentColor;
+}
+.aeo .aeo-ping::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: currentColor;
+  animation: aeo-ping 1.8s var(--aeo-ease) infinite;
+}
+
+/* ============================================
+   ⇈ GROWTH FIELD (logo chevrons stepping upward)
+   ============================================ */
+
+/* The column is one chevron taller than the window. It climbs exactly one
+   chevron, pauses, and loops. Because every chevron is identical, the
+   reset is invisible: it reads as endless, steady growth. */
+.aeo .aeo-growth-field {
+  -webkit-mask-image: linear-gradient(
+    180deg,
+    transparent,
+    #000 25%,
+    #000 70%,
+    transparent
+  );
+  mask-image: linear-gradient(
+    180deg,
+    transparent,
+    #000 25%,
+    #000 70%,
+    transparent
+  );
+}
+.aeo .aeo-growth-field__track {
+  animation: aeo-climb 3.6s var(--aeo-ease) infinite;
+}
+
+/* Blinking caret for the typing mock */
+.aeo .aeo-caret {
+  display: inline-block;
+  width: 2px;
+  height: 1em;
+  margin-left: 1px;
+  vertical-align: -0.15em;
+  background: currentColor;
+  animation: aeo-blink 1s steps(1) infinite;
+}
+
+/* ============================================
+   🎞 MARQUEE
+   ============================================ */
+.aeo .aeo-marquee {
+  overflow: hidden;
+  -webkit-mask-image: linear-gradient(
+    90deg,
+    transparent,
+    #000 10%,
+    #000 90%,
+    transparent
+  );
+  mask-image: linear-gradient(
+    90deg,
+    transparent,
+    #000 10%,
+    #000 90%,
+    transparent
+  );
+}
+.aeo .aeo-marquee__track {
+  display: flex;
+  width: max-content;
+  animation: aeo-marquee 48s linear infinite;
+}
+
+@keyframes aeo-ping {
+  70%,
+  100% {
+    transform: scale(2.6);
+    opacity: 0;
+  }
+}
+
+@keyframes aeo-marquee {
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+@keyframes aeo-climb {
+  0%,
+  25% {
+    transform: translateY(0);
+  }
+  85%,
+  100% {
+    transform: translateY(calc(-1 * var(--aeo-step)));
+  }
+}
+
+@keyframes aeo-blink {
+  50% {
+    opacity: 0;
+  }
+}
+
+/* Respect people who've asked their OS for less motion */
+@media (prefers-reduced-motion: reduce) {
+  .aeo .aeo-marquee__track,
+  .aeo .aeo-ping::after,
+  .aeo .aeo-growth-field__track,
+  .aeo .aeo-caret {
+    animation: none;
+  }
+}
