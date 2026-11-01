@@ -28,7 +28,7 @@ export function AeoWhySkipped() {
 
   return (
     <section className="aeo-section">
-      <div className="aeo-wrap grid gap-8 lg:grid-cols-2 lg:items-center">
+      <div className="aeo-wrap grid grid-cols-1 gap-8 lg:grid-cols-2 lg:items-center">
         <div>
           <SectionIndex n="03" />
           <SplitHeading

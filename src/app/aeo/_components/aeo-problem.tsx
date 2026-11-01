@@ -63,7 +63,7 @@ export function AeoProblem() {
       <div className="aeo-wrap">
         <SectionIndex n="01" dark />
 
-        <div className="grid gap-3 lg:grid-cols-2 lg:items-end lg:gap-8">
+        <div className="grid grid-cols-1 gap-3 lg:grid-cols-2 lg:items-end lg:gap-8">
           <SplitHeading
             text="Buyers ask AI first."
             accent={["first."]}
@@ -76,7 +76,7 @@ export function AeoProblem() {
           </Reveal>
         </div>
 
-        <div className="mt-8 grid gap-6 lg:grid-cols-[2fr_3fr] lg:gap-0">
+        <div className="mt-8 grid grid-cols-1 gap-6 lg:grid-cols-[2fr_3fr] lg:gap-0">
           <StatGroup
             tone="down"
             label="Google clicks are shrinking"

@@ -10,7 +10,7 @@ export function AeoFounder() {
   return (
     <section className="aeo-section !pt-0">
       <div className="aeo-wrap">
-        <div className="grid gap-5 rounded-[var(--aeo-r-lg)] bg-[var(--aeo-paper-deep)] p-3 sm:p-5 md:grid-cols-[200px_1fr] md:items-center md:gap-8 lg:p-8">
+        <div className="grid grid-cols-1 gap-5 rounded-[var(--aeo-r-lg)] bg-[var(--aeo-paper-deep)] p-3 sm:p-5 md:grid-cols-[200px_1fr] md:items-center md:gap-8 lg:p-8">
           <Reveal>
             <div className="relative aspect-[4/5] w-full max-w-[200px] overflow-hidden rounded-[var(--aeo-r-md)] bg-[var(--aeo-ink)]">
               <Image

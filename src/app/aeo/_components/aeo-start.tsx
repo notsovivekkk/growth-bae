@@ -21,7 +21,7 @@ export function AeoStart() {
           className="aeo-h2"
         />
 
-        <div className="mt-6 grid gap-2 lg:grid-cols-2">
+        <div className="mt-6 grid grid-cols-1 gap-2 lg:grid-cols-2">
           <Reveal>
             <div className="aeo-card flex h-full flex-col p-3 sm:p-4">
               <StepNumber n={1} />

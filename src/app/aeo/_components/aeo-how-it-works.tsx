@@ -1,6 +1,12 @@
 "use client"
 
-import { useRef, useState, type PointerEvent, type ReactNode } from "react"
+import {
+  useEffect,
+  useRef,
+  useState,
+  type PointerEvent,
+  type ReactNode,
+} from "react"
 import Image from "next/image"
 import { AnimatePresence, motion, useReducedMotion } from "framer-motion"
 import { ArrowRight, Check, Plus } from "lucide-react"
@@ -143,8 +149,9 @@ export function AeoHowItWorks() {
 
         {/* Desktop: list and panel share one height, so all four steps and
             the active detail are on screen together. No scrolling between. */}
-        <div className="mt-5 grid gap-6 lg:grid-cols-2 lg:items-stretch">
-          <ul className="space-y-[8px] lg:h-[480px]">
+        {/* grid-cols-1 = minmax(0, 1fr): lets the column shrink to the phone width */}
+        <div className="mt-5 grid grid-cols-1 gap-6 lg:grid-cols-2 lg:items-stretch">
+          <ul className="min-w-0 space-y-[8px] lg:h-[480px]">
             {STEPS.map((step, i) => {
               const open = i === active
               const panelId = `aeo-step-panel-${i}`
@@ -256,7 +263,7 @@ export function AeoHowItWorks() {
 function PanelBody({ step, fill = false }: { step: Step; fill?: boolean }) {
   return (
     <>
-      <div className="relative flex h-[210px] shrink-0 items-center justify-center overflow-hidden rounded-[16px] bg-[var(--aeo-paper)] px-[20px] pb-[12px] pt-[28px]">
+      <div className="relative flex min-h-[210px] shrink-0 items-center justify-center overflow-hidden rounded-[16px] bg-[var(--aeo-paper)] px-[20px] pb-[12px] pt-[28px] lg:h-[210px]">
         <span className="absolute right-[12px] top-[9px] text-[11px] font-medium uppercase tracking-[0.08em] text-[var(--aeo-ink-soft)]">
           Example
         </span>
@@ -350,8 +357,7 @@ function GapMockup() {
     { label: "Clear FAQ", y: 160 },
   ]
   return (
-    // Fixed-geometry drawing: scaled down to fit narrow phones
-    <div className="relative h-[196px] w-[340px] shrink-0 scale-[0.84] max-sm:scale-[0.74]">
+    <FitWidth width={340} height={196} maxScale={0.84}>
       <div className="absolute inset-y-0 left-0 w-[190px] rounded-[10px] border border-[var(--aeo-line)] bg-[var(--aeo-card)]">
         <span className="absolute left-[14px] top-[14px] h-[8px] w-[120px] rounded-full bg-[var(--aeo-ink-dim)]" />
         <span className="absolute left-[14px] top-[31px] h-[6px] w-[60px] rounded-full bg-[var(--aeo-green)]" />
@@ -402,6 +408,57 @@ function GapMockup() {
           </span>
         </motion.div>
       ))}
+    </FitWidth>
+  )
+}
+
+/**
+ * Shrinks a fixed-size drawing to fit its container (never enlarges past
+ * maxScale). The drawing is absolutely positioned, so its fixed width can't
+ * stretch the layout around it. A plain CSS scale only shrinks the visuals
+ * and still reserves the full width, which is what overflowed on phones.
+ */
+function FitWidth({
+  width,
+  height,
+  maxScale = 1,
+  children,
+}: {
+  width: number
+  height: number
+  maxScale?: number
+  children: ReactNode
+}) {
+  const ref = useRef<HTMLDivElement>(null)
+  const [scale, setScale] = useState(maxScale)
+
+  useEffect(() => {
+    const el = ref.current
+    if (!el) return
+    const ro = new ResizeObserver(([entry]) => {
+      setScale(Math.min(maxScale, entry.contentRect.width / width))
+    })
+    ro.observe(el)
+    return () => ro.disconnect()
+  }, [width, maxScale])
+
+  return (
+    <div
+      ref={ref}
+      className="relative w-full"
+      style={{ height: height * scale }}
+    >
+      <div
+        className="absolute left-1/2 top-0"
+        style={{
+          width,
+          height,
+          transform: `translateX(-50%) scale(${scale})`,
+          transformOrigin: "top center",
+        }}
+      >
+        {children}
+      </div>
     </div>
   )
 }
@@ -432,7 +489,7 @@ function FixMockup() {
           </span>
           <span
             className={cn(
-              "min-w-0 flex-1 truncate text-[13px]",
+              "min-w-0 flex-1 text-[13px] leading-[1.35] sm:truncate",
               t.done && "text-[var(--aeo-ink-soft)]"
             )}
           >

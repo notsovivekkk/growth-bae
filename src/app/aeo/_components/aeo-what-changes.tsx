@@ -41,7 +41,7 @@ const OUTCOMES: Outcome[] = [
 export function AeoWhatChanges() {
   return (
     <section className="aeo-section">
-      <div className="aeo-wrap grid gap-6 lg:grid-cols-[0.8fr_1.2fr] lg:gap-8">
+      <div className="aeo-wrap grid grid-cols-1 gap-6 lg:grid-cols-[0.8fr_1.2fr] lg:gap-8">
         {/* Heading pins while the cards scroll past it on desktop */}
         <div className="lg:sticky lg:top-12 lg:self-start">
           <SectionIndex n="02" />
@@ -52,7 +52,7 @@ export function AeoWhatChanges() {
           />
         </div>
 
-        <div className="grid gap-2 sm:grid-cols-2">
+        <div className="grid grid-cols-1 gap-2 sm:grid-cols-2">
           {OUTCOMES.map(({ icon: Icon, title, body }, i) => (
             <Reveal key={title} delay={(i % 2) * 0.1}>
               <div className="aeo-card flex h-full min-h-[184px] flex-col p-3">

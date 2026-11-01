@@ -34,7 +34,7 @@ export function AeoPromise() {
 
   return (
     <section id="promise" className="aeo-night aeo-section">
-      <div className="aeo-wrap grid gap-8 lg:grid-cols-[0.9fr_1.1fr]">
+      <div className="aeo-wrap grid grid-cols-1 gap-8 lg:grid-cols-[0.9fr_1.1fr]">
         <div className="flex flex-col">
           <SectionIndex n="04" dark />
           <SplitHeading

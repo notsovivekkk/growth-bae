@@ -9,7 +9,7 @@ export function AeoHero() {
   return (
     <section className="relative overflow-hidden">
       {/* ~55/45 split from lg; below that the stage stacks under the text */}
-      <div className="aeo-wrap grid items-center gap-6 pb-12 pt-8 lg:min-h-[min(calc(100svh-120px),760px)] lg:grid-cols-[minmax(0,1.2fr)_minmax(0,1fr)] lg:gap-6 lg:py-10">
+      <div className="aeo-wrap grid grid-cols-1 items-center gap-6 pb-12 pt-8 lg:min-h-[min(calc(100svh-120px),760px)] lg:grid-cols-[minmax(0,1.2fr)_minmax(0,1fr)] lg:gap-6 lg:py-10">
         <div>
           <SplitHeading
             as="h1"
