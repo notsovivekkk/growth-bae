@@ -68,7 +68,7 @@ const STEPS: Step[] = [
     bullets: [
       "Every finding becomes a clear task",
       "Ranked by impact",
-      "Your team ships, we guide each step",
+      "We ship every fix, step by step",
     ],
     description:
       "We turn what we find into a simple to-do list your team can act on.",
