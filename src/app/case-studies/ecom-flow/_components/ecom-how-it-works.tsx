@@ -41,7 +41,7 @@ const STEPS: Step[] = [
 export function EcomHowItWorks() {
   return (
     <div className="border-b border-[#004225]/12">
-      <section className="mx-auto max-w-[1200px] px-6 py-12 lg:py-12">
+      <section className="mx-auto max-w-[1200px] px-3 py-8 lg:px-6 lg:py-12">
         <motion.p
           initial={{ opacity: 0, y: 16 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -52,7 +52,7 @@ export function EcomHowItWorks() {
           How EcomFlow Works
         </motion.p>
 
-        <div className="mt-8 grid items-start gap-6 lg:grid-cols-2 lg:gap-12">
+        <div className="mt-6 grid items-start gap-6 lg:mt-8 lg:grid-cols-2 lg:gap-12">
           {/* Left column */}
           <div>
             <motion.h2
@@ -60,7 +60,7 @@ export function EcomHowItWorks() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={VIEWPORT}
               transition={{ duration: 0.6, delay: 0.1 }}
-              className="mb-3 font-serif text-[clamp(36px,4vw,56px)] font-extrabold leading-[1.05] tracking-[-1.5px] text-primary"
+              className="mb-3 font-serif text-[clamp(28px,4vw,56px)] font-extrabold leading-[1.05] tracking-[-1.5px] text-primary"
             >
               One system.
               <br />
@@ -72,7 +72,7 @@ export function EcomHowItWorks() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={VIEWPORT}
               transition={{ duration: 0.6, delay: 0.15 }}
-              className="mb-6 max-w-[480px] text-[15px] font-light leading-[1.75] text-[#7A7467]"
+              className="mb-6 max-w-[480px] text-[14px] font-light leading-[1.75] text-[#7A7467] lg:text-[15px]"
             >
               EcomFlow connects directly into your store and runs three AI agents
               silently in the background — handling support, recovering carts, and
@@ -88,16 +88,16 @@ export function EcomHowItWorks() {
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={VIEWPORT}
                   transition={{ duration: 0.5, delay: 0.1 * index }}
-                  className="grid grid-cols-[48px_1fr] gap-2 border-b border-[#004225]/12 py-4 last:border-b-0"
+                  className="grid grid-cols-[36px_1fr] gap-2 border-b border-[#004225]/12 py-4 last:border-b-0 lg:grid-cols-[48px_1fr]"
                 >
                   <span className="pt-[3px] text-[11px] font-semibold tracking-[0.1em] text-[#A09890]">
                     {step.number}
                   </span>
                   <div>
-                    <div className="mb-1 font-serif text-[17px] font-bold tracking-[-0.3px] text-primary">
+                    <div className="mb-1 font-serif text-[15px] font-bold tracking-[-0.3px] text-primary lg:text-[17px]">
                       {step.title}
                     </div>
-                    <p className="text-[13px] font-light leading-[1.65] text-[#7A7467]">
+                    <p className="text-[12px] font-light leading-[1.65] text-[#7A7467] lg:text-[13px]">
                       {step.description}
                     </p>
                   </div>
