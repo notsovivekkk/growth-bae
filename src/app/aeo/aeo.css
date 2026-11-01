@@ -70,6 +70,14 @@
   overflow-x: clip;
 }
 
+/* globals.css puts overflow-x: hidden on html and body. That makes body a
+   scroll container, which silently breaks position: sticky (our nav).
+   clip hides sideways overflow the same way, without that side effect. */
+html:has(.aeo),
+html:has(.aeo) body {
+  overflow-x: clip;
+}
+
 /* Reset the global link + heading styles inside this page only.
    :where() keeps specificity at zero so utility classes still win. */
 :where(.aeo) a,

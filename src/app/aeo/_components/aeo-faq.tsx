@@ -11,7 +11,7 @@ export function AeoFaq() {
   const [open, setOpen] = useState<number | null>(0)
 
   return (
-    <section className="aeo-section border-t border-[var(--aeo-line)]">
+    <section id="faq" className="aeo-section border-t border-[var(--aeo-line)]">
       <div className="aeo-wrap grid gap-6 lg:grid-cols-[0.8fr_1.2fr] lg:gap-8">
         <div className="lg:sticky lg:top-12 lg:self-start">
           <SectionIndex n="07" />

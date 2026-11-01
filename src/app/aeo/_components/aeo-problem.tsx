@@ -59,7 +59,7 @@ type Tone = "down" | "up"
  */
 export function AeoProblem() {
   return (
-    <section className="aeo-night aeo-section">
+    <section id="proof" className="aeo-night aeo-section">
       <div className="aeo-wrap">
         <SectionIndex n="01" dark />
 

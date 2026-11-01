@@ -119,7 +119,7 @@ export function AeoHowItWorks() {
   }
 
   return (
-    <section className="aeo-section">
+    <section id="how-it-works" className="aeo-section">
       <div className="aeo-wrap">
         {/* Heading spans the width so the list and panel can start level */}
         <div className="mb-3 flex items-center gap-[8px]">
